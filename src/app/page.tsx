@@ -7,7 +7,7 @@ export default function Home() {
         <h1 className="text-4xl font-bold">Next.js Shell</h1>
         <div id="service-a-root"></div>
         <br />
-        <Link href="/service-a">Service A</Link>
+        <Link href="/services">All Services</Link>
       </main>
     </>
   );

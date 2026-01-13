@@ -7,7 +7,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="ar" dir="rtl">
       <head>
         {/* SystemJS */}
         <script src="https://cdn.jsdelivr.net/npm/systemjs/dist/system.min.js" />
