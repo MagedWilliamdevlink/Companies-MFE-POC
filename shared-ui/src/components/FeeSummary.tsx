@@ -21,10 +21,10 @@ const styles: Record<string, React.CSSProperties> = {
     display: "flex",
     flexDirection: "column",
     gap: "31px",
-    alignItems: "flex-end",
     position: "relative",
     width: "100%",
     maxWidth: "500px",
+    direction: "rtl", // RTL for Arabic
   },
   card: {
     backgroundColor: "#ffffff",
@@ -43,12 +43,12 @@ const styles: Record<string, React.CSSProperties> = {
     display: "flex",
     gap: "12px",
     alignItems: "center",
-    justifyContent: "flex-end",
+    justifyContent: "flex-start", // RTL: flex-start = right
   },
   headerTitle: {
-    fontFamily: "'Helvetica Neue LT Arabic', 'Helvetica Neue', sans-serif",
+    fontFamily: "'Cairo', 'Helvetica Neue', sans-serif",
     fontWeight: 700,
-    fontSize: "24px",
+    fontSize: "20px",
     lineHeight: "30px",
     color: "#2f3642",
     margin: 0,
@@ -76,32 +76,42 @@ const styles: Record<string, React.CSSProperties> = {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    fontFamily: "'Helvetica Neue LT Arabic', 'Helvetica Neue', sans-serif",
+    fontFamily: "'Cairo', 'Helvetica Neue', sans-serif",
     fontWeight: 400,
-    fontSize: "18px",
+    fontSize: "16px",
     color: "#000000",
-    textAlign: "right",
     width: "100%",
+  },
+  itemLabel: {
+    margin: 0,
+    textAlign: "right",
+  },
+  itemPrice: {
+    margin: 0,
+    direction: "ltr", // Keep price LTR for proper number display
+    textAlign: "left",
   },
   totalContainer: {
     backgroundColor: "#f2f7fe",
     width: "100%",
-    padding: "12px",
+    padding: "12px 16px",
+    borderRadius: "8px",
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
   },
   totalAmount: {
-    fontFamily: "'Helvetica Neue LT Arabic', 'Helvetica Neue', sans-serif",
+    fontFamily: "'Cairo', 'Helvetica Neue', sans-serif",
     fontWeight: 700,
-    fontSize: "24px",
+    fontSize: "20px",
     color: "#2667da",
     margin: 0,
+    direction: "ltr", // Keep price LTR
   },
   totalLabel: {
-    fontFamily: "'Helvetica Neue LT Arabic', 'Helvetica Neue', sans-serif",
-    fontWeight: 400,
-    fontSize: "24px",
+    fontFamily: "'Cairo', 'Helvetica Neue', sans-serif",
+    fontWeight: 500,
+    fontSize: "18px",
     color: "#000000",
     margin: 0,
   },
@@ -120,36 +130,35 @@ const styles: Record<string, React.CSSProperties> = {
     transition: "opacity 0.2s ease",
   },
   buttonText: {
-    fontFamily: "'Helvetica Neue LT Arabic', 'Helvetica Neue', sans-serif",
+    fontFamily: "'Cairo', 'Helvetica Neue', sans-serif",
     fontWeight: 700,
-    fontSize: "20px",
+    fontSize: "18px",
     color: "#ffffff",
-    letterSpacing: "-0.8px",
     lineHeight: "28px",
   },
   footer: {
     display: "flex",
     flexDirection: "column",
-    gap: "18px",
-    alignItems: "flex-end",
+    gap: "12px",
+    width: "100%",
   },
   footerRow: {
     display: "flex",
-    gap: "32px",
+    justifyContent: "space-between",
     alignItems: "center",
-    fontFamily: "'Helvetica Neue LT Arabic', 'Helvetica Neue', sans-serif",
+    fontFamily: "'Cairo', 'Helvetica Neue', sans-serif",
     fontWeight: 400,
-    fontSize: "16px",
+    fontSize: "14px",
+    width: "100%",
   },
   footerValue: {
     color: "#000000",
     margin: 0,
-    lineHeight: "19px",
+    direction: "ltr", // Keep values LTR for dates/times
   },
   footerLabel: {
     color: "#5e5e5e",
     margin: 0,
-    lineHeight: "19px",
   },
 };
 
@@ -194,31 +203,24 @@ export default function FeeSummary({
               display: "flex",
               flexDirection: "column",
               gap: "24px",
-              alignItems: "flex-end",
               width: "100%",
             }}
           >
-            {/* Header */}
+            {/* Header - Icon then Title (RTL: icon on right) */}
             <div style={styles.header}>
-              <p style={styles.headerTitle} dir="auto">
-                ملخص رسوم الخدمة
-              </p>
               <ReceiptIcon />
+              <p style={styles.headerTitle}>ملخص رسوم الخدمة</p>
             </div>
 
             {/* Divider */}
             <div style={styles.divider} />
 
-            {/* Items List */}
+            {/* Items List - Label on right, Price on left */}
             <div style={styles.itemsList}>
               {items.map((item, index) => (
                 <div key={index} style={styles.itemRow}>
-                  <p style={{ margin: 0 }} dir="auto">
-                    {item.price} EGP
-                  </p>
-                  <p style={{ margin: 0 }} dir="auto">
-                    {item.label}
-                  </p>
+                  <p style={styles.itemLabel}>{item.label}</p>
+                  <p style={styles.itemPrice}>{item.price} EGP</p>
                 </div>
               ))}
             </div>
@@ -226,14 +228,10 @@ export default function FeeSummary({
             {/* Divider */}
             <div style={styles.dividerLight} />
 
-            {/* Total */}
+            {/* Total - Label on right, Amount on left */}
             <div style={styles.totalContainer}>
-              <p style={styles.totalAmount} dir="auto">
-                {total} EGP
-              </p>
-              <p style={styles.totalLabel} dir="auto">
-                الأجمالي
-              </p>
+              <p style={styles.totalLabel}>الأجمالي</p>
+              <p style={styles.totalAmount}>{total} EGP</p>
             </div>
           </div>
 
@@ -247,33 +245,23 @@ export default function FeeSummary({
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
-            <span style={styles.buttonText} dir="auto">
-              دفع المستحقات
-            </span>
+            <span style={styles.buttonText}>دفع المستحقات</span>
           </button>
         </div>
       </div>
 
       {/* Footer Info */}
       <div style={styles.footer}>
-        {/* Expiry Date */}
+        {/* Expiry Date - Label on right, Value on left */}
         <div style={styles.footerRow}>
-          <p style={styles.footerValue} dir="auto">
-            {expiryDate}
-          </p>
-          <p style={styles.footerLabel} dir="auto">
-            تاريخ انتهاء الصلاحية
-          </p>
+          <p style={styles.footerLabel}>تاريخ انتهاء الصلاحية</p>
+          <p style={styles.footerValue}>{expiryDate}</p>
         </div>
 
-        {/* Payment Time */}
-        <div style={{ ...styles.footerRow, justifyContent: "space-between", width: "100%" }}>
-          <p style={styles.footerValue} dir="auto">
-            {paymentTime}
-          </p>
-          <p style={styles.footerLabel} dir="auto">
-            الدفع
-          </p>
+        {/* Payment Time - Label on right, Value on left */}
+        <div style={styles.footerRow}>
+          <p style={styles.footerLabel}>الدفع</p>
+          <p style={styles.footerValue}>{paymentTime}</p>
         </div>
       </div>
     </div>
