@@ -11,7 +11,7 @@ module.exports = (webpackConfigEnv, argv) => {
   });
 
   return merge(defaultConfig, {
-    externals: ["@shared-ui/shared-ui"],
+    externals: {},
     // modify the webpack config however you'd like to by adding to this object
   });
 };

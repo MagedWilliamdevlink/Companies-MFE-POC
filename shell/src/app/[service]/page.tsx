@@ -5,5 +5,5 @@ export default async function ServicePage({
 }) {
   const { service } = await params;
 
-  return <div id={`${service}-root`} />;
+  return <div id={`${service}-root`} className="h-full" />;
 }

@@ -53,7 +53,7 @@ const styles: Record<string, React.CSSProperties> = {
   wrapper: {
     display: "flex",
     direction: "rtl",
-    minHeight: "100vh",
+    minHeight: "95vh",
     fontFamily: "'Cairo', 'Helvetica Neue', sans-serif",
     backgroundColor: "#f5f7fa",
   },
