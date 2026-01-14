@@ -1,6 +1,7 @@
 import "./globals.css";
 import SingleSpaProvider from "../components/SingleSpaProvider";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 export default function RootLayout({
   children,
@@ -40,10 +41,13 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-screen bg-gray-50">
-        <Navbar />
+      <body className="min-h-screen min-w-[99vw] bg-[#f5f7fa]!  flex flex-col ">
         <SingleSpaProvider />
-        <main>{children}</main>
+        <Navbar />
+        <main className="  min-w-full min-h-full  bg-[#f5f6f9]!">
+          {children}
+        </main>
+        <Footer />
       </body>
     </html>
   );

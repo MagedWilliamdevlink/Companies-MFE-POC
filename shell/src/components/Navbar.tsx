@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 
 // Icons as components
@@ -136,11 +137,20 @@ function NavLink({ children, active = false, onClick }: NavLinkProps) {
 
 export default function Navbar() {
   const [searchQuery, setSearchQuery] = useState("");
-  const [activeNav, setActiveNav] = useState("services");
+  const pathname = usePathname();
+  const router = useRouter();
+
+  const getActiveNav = () => {
+    if (pathname === "/") return "home";
+    if (pathname.startsWith("/services") || pathname.startsWith("/service-"))
+      return "services";
+    if (pathname.startsWith("/maps")) return "maps";
+    return "";
+  };
 
   return (
     <nav className="bg-white border-b border-gray-100 min-h-[5vh] z-50 shadow-sm">
-      <div className="max-w-[1400px] mx-auto px-4">
+      <div className="max-w-[1920px] mx-auto px-4">
         <div className="flex items-center justify-between h-16" dir="rtl">
           {/* Right Section - Logos & Navigation */}
           <div className="flex items-center gap-6">
@@ -167,28 +177,28 @@ export default function Navbar() {
             {/* Navigation Links */}
             <div className="hidden md:flex items-center gap-1 mr-4">
               <NavLink
-                active={activeNav === "home"}
-                onClick={() => setActiveNav("home")}
+                active={getActiveNav() === "home"}
+                onClick={() => router.push("/")}
               >
                 الرئيسية
               </NavLink>
               <NavLink
-                active={activeNav === "services"}
-                onClick={() => setActiveNav("services")}
+                active={getActiveNav() === "services"}
+                onClick={() => router.push("/services")}
               >
                 الخدمات
               </NavLink>
-              <NavLink
-                active={activeNav === "maps"}
-                onClick={() => setActiveNav("maps")}
-              >
+              <NavLink active={getActiveNav() === "maps"} onClick={() => {}}>
                 خرائط جهات الوصول
               </NavLink>
             </div>
           </div>
 
           {/* Center Section - Search */}
-          <div className="flex-1 max-w-md mx-8 hidden lg:block">
+          <div className="flex-1 max-w-md mx-8 hidden lg:block"></div>
+
+          {/* Left Section - Actions */}
+          <div className="flex items-center gap-2">
             <div className="relative">
               <input
                 type="text"
@@ -202,10 +212,6 @@ export default function Navbar() {
                 <SearchIcon />
               </div>
             </div>
-          </div>
-
-          {/* Left Section - Actions */}
-          <div className="flex items-center gap-2">
             {/* Language Selector */}
             <button className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-gray-600 hover:bg-gray-50 transition-all duration-200">
               <GlobeIcon />

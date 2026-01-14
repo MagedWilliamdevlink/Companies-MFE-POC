@@ -56,6 +56,7 @@ export default function VerticalStepper({
       <div
         style={{
           fontFamily: "'Cairo', 'Helvetica Neue', sans-serif",
+          height: "100%",
         }}
       >
         {/* Header */}
