@@ -1,0 +1,5 @@
+.custom-stepper-vertical .ant-steps-item-rail-process,
+.custom-stepper-vertical .ant-steps-item-rail-wait,
+.custom-stepper-vertical .ant-steps-item-rail-finish {
+  display: none;
+}

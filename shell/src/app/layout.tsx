@@ -32,10 +32,17 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               imports: {
+                react: "https://ga.jspm.io/npm:react@19.2.3/dev.index.js",
+                "react-dom":
+                  "https://ga.jspm.io/npm:react-dom@19.2.3/dev.index.js",
+                "react-dom/client":
+                  "https://ga.jspm.io/npm:react-dom@19.2.3/client.index.js",
                 "@service-a/service-a":
                   "http://localhost:8080/service-a-service-a.js",
                 "@shared-ui/shared-ui":
                   "http://localhost:8081/shared-ui-shared-ui.js",
+                "@common/common-components":
+                  "http://localhost:8082/common-common-components.js",
               },
             }),
           }}

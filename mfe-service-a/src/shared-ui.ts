@@ -13,6 +13,21 @@ function getSharedUi(): Promise<any> {
 
 // Export individual parcel loaders - clean and reusable
 export const ButtonParcel = () => getSharedUi().then((m) => m.ButtonParcel);
-export const FeeSummaryParcel = () => getSharedUi().then((m) => m.FeeSummaryParcel);
-export const VerticalStepperParcel = () => getSharedUi().then((m) => m.VerticalStepperParcel);
-export const ServicePageLayoutParcel = () => getSharedUi().then((m) => m.ServicePageLayoutParcel);
+export const VerticalStepperParcel = () =>
+  getSharedUi().then((m) => m.VerticalStepperParcel);
+export const NavigationButtonsParcel = () =>
+  getSharedUi().then((m) => m.NavigationButtonsParcel);
+export const ServicePageLayoutParcel = () =>
+  getSharedUi().then((m) => m.ServicePageLayoutParcel);
+
+// Form components
+export const FormLabelParcel = () =>
+  getSharedUi().then((m) => m.FormLabelParcel);
+export const FormInputParcel = () =>
+  getSharedUi().then((m) => m.FormInputParcel);
+export const FormSelectParcel = () =>
+  getSharedUi().then((m) => m.FormSelectParcel);
+
+// Table component
+export const PaymentTableParcel = () =>
+  getSharedUi().then((m) => m.PaymentTableParcel);

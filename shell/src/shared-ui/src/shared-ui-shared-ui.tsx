@@ -23,11 +23,11 @@ export { default as Button } from "./components/Button";
 export type { ButtonProps } from "./components/Button";
 // export { default as FeeSummary } from "./components/FeeSummary";
 // export type { FeeSummaryProps, FeeItem } from "./components/FeeSummary";
-export { default as VerticalStepper } from "./components/VerticalStepper";
+export { default as VerticalStepper } from "../../components/shared/VerticalStepper";
 export type {
   VerticalStepperProps,
   StepItem,
-} from "./components/VerticalStepper";
+} from "../../components/shared/VerticalStepper";
 export { default as NavigationButtons } from "./components/NavigationButtons";
 export type { NavigationButtonsProps } from "./components/NavigationButtons";
 // export { default as ServicePageLayout } from "./components/ServicePageLayout";
