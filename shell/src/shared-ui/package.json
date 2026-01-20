@@ -47,13 +47,13 @@
   "dependencies": {
     "@ant-design/icons": "^6.1.0",
     "@types/jest": "^27.0.1",
-    "@types/react": "^19.0.0",
-    "@types/react-dom": "^19.0.0",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
     "@types/systemjs": "^6.1.1",
     "@types/webpack-env": "^1.16.2",
     "antd": "^6.2.0",
-    "react": "^19.2.3",
-    "react-dom": "^19.2.3",
+    "react": "^18",
+    "react-dom": "^18",
     "single-spa": "^5.9.3",
     "single-spa-react": "^6.0.2"
   },

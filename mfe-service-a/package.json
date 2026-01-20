@@ -46,15 +46,15 @@
     "webpack-config-single-spa-react-ts": "^8.0.0"
   },
   "dependencies": {
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "react": "^18",
+    "react-dom": "^18",
     "single-spa-react": "^6.0.2",
     "@types/jest": "^27.0.1",
     "@types/systemjs": "^6.1.1",
     "@types/webpack-env": "^1.16.2",
     "single-spa": "^5.9.3",
-    "@types/react": "^19.0.0",
-    "@types/react-dom": "^19.0.0"
+    "@types/react": "^18",
+    "@types/react-dom": "^18"
   },
   "types": "dist/service-a-service-a.d.ts"
 }

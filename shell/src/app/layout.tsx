@@ -32,6 +32,9 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               imports: {
+                "react": "https://cdn.jsdelivr.net/npm/react@18/umd/react.development.js",
+                "react-dom": "https://cdn.jsdelivr.net/npm/react-dom@18/umd/react-dom.development.js",
+                "react-dom/client": "https://cdn.jsdelivr.net/npm/react-dom@18/umd/react-dom.development.js",
                 "@service-a/service-a":
                   "http://localhost:8080/service-a-service-a.js",
                 "@shared-ui/shared-ui":
