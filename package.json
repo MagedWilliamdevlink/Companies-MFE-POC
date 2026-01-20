@@ -1,0 +1,12 @@
+{
+    "name": "companies-mfe-poc-root",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+        "install-all": "concurrently \"npm install --prefix common-components\" \"npm install --prefix mfe-service-a\" \"npm install --prefix shell\" \"npm install --prefix shell/src/shared-ui\"",
+        "start-all": "concurrently \"npm run dev --prefix shell\" \"npm start --prefix common-components\" \"npm start --prefix mfe-service-a\" \"npm start --prefix shell/src/shared-ui\""
+    },
+    "devDependencies": {
+        "concurrently": "^9.1.2"
+    }
+}
