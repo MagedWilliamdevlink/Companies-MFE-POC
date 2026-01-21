@@ -35,10 +35,11 @@ export default function RootLayout({
                 "react": "https://cdn.jsdelivr.net/npm/react@18/umd/react.development.js",
                 "react-dom": "https://cdn.jsdelivr.net/npm/react-dom@18/umd/react-dom.development.js",
                 "react-dom/client": "https://cdn.jsdelivr.net/npm/react-dom@18/umd/react-dom.development.js",
+                
                 "@shared-ui/shared-ui":
-                  "http://localhost:8081/shared-ui-shared-ui.js",
+                  process.env.NEXT_PUBLIC_SHARED_UITOOLKIT || "http://localhost:8081/shared-ui-shared-ui.js",
                 "@common/common-components":
-                  "http://localhost:8082/common-common-components.js",
+                  process.env.NEXT_PUBLIC_COMMON_COMPONENT || "http://localhost:8082/common-common-components.js",
               },
             }),
           }}
