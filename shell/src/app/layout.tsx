@@ -26,7 +26,7 @@ export default function RootLayout({
         {/* SystemJS */}
         <script src="https://cdn.jsdelivr.net/npm/systemjs/dist/system.min.js" />
 
-        {/* Import Map */}
+        {/* Base Import Map */}
         <script
           type="systemjs-importmap"
           dangerouslySetInnerHTML={{
@@ -35,14 +35,40 @@ export default function RootLayout({
                 "react": "https://cdn.jsdelivr.net/npm/react@18/umd/react.development.js",
                 "react-dom": "https://cdn.jsdelivr.net/npm/react-dom@18/umd/react-dom.development.js",
                 "react-dom/client": "https://cdn.jsdelivr.net/npm/react-dom@18/umd/react-dom.development.js",
-                "@service-a/service-a":
-                  "http://localhost:8080/service-a-service-a.js",
                 "@shared-ui/shared-ui":
                   "http://localhost:8081/shared-ui-shared-ui.js",
                 "@common/common-components":
                   "http://localhost:8082/common-common-components.js",
               },
             }),
+          }}
+        />
+
+        {/* Dynamic Services Import Map */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (async function() {
+                try {
+                  const response = await fetch('/services.json');
+                  const services = await response.json();
+                  
+                  const microAppImports = services
+                    .filter(service => service.hostType === 'microApp')
+                    .reduce((acc, service) => {
+                      acc[service.hostInfo.org] = service.hostInfo.url;
+                      return acc;
+                    }, {});
+                  
+                  // Add dynamic imports to SystemJS
+                  System.addImportMap({
+                    imports: microAppImports
+                  });
+                } catch (error) {
+                  console.error('Failed to load dynamic services import map:', error);
+                }
+              })();
+            `,
           }}
         />
       </head>

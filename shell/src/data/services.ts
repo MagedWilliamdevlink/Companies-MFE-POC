@@ -5,80 +5,45 @@ export interface Service {
   category: string;
   status: "active" | "inactive" | "pending" | "completed" | "cancelled";
   ctaLink: string;
+  hostType: "microApp" | "external"
+  hostInfo: {
+    org: string;
+    url: string;
+  };
 }
 
-export const services: Service[] = [
-  {
-    id: "service-a",
-    title: "خدمة التراخيص الإلكترونية",
-    description: "إصدار وتجديد التراخيص الإلكترونية للمنشآت والشركات بسهولة",
-    category: "تراخيص",
-    status: "active",
-    ctaLink: "/service-a",
-  },
-  {
-    id: "service-b",
-    title: "خدمة التسجيل التجاري",
-    description: "تسجيل وإدارة السجلات التجارية إلكترونياً",
-    category: "تجاري",
-    status: "active",
-    ctaLink: "/service-b",
-  },
-  {
-    id: "service-c",
-    title: "خدمة الاستعلام عن المعاملات",
-    description: "استعلام عن حالة المعاملات والطلبات الخاصة بك",
-    category: "استعلامات",
-    status: "active",
-    ctaLink: "/service-c",
-  },
-  {
-    id: "service-d",
-    title: "خدمة الدعم الفني",
-    description: "الحصول على الدعم الفني والمساعدة في استخدام الخدمات",
-    category: "دعم",
-    status: "pending",
-    ctaLink: "/service-d",
-  },
-  {
-    id: "service-e",
-    title: "خدمة التقارير والإحصائيات",
-    description: "عرض التقارير والإحصائيات الخاصة بالمعاملات",
-    category: "تقارير",
-    status: "active",
-    ctaLink: "/service-e",
-  },
-  {
-    id: "service-f",
-    title: "خدمة إدارة المستخدمين",
-    description: "إدارة حسابات المستخدمين والصلاحيات",
-    category: "إدارة",
-    status: "completed",
-    ctaLink: "/service-f",
-  },
-  {
-    id: "service-g",
-    title: "خدمة الإشعارات",
-    description: "إدارة الإشعارات والتنبيهات الخاصة بالمعاملات",
-    category: "إشعارات",
-    status: "active",
-    ctaLink: "/service-g",
-  },
-  {
-    id: "service-h",
-    title: "خدمة الدفع الإلكتروني",
-    description: "الدفع الإلكتروني للرسوم والخدمات",
-    category: "مالية",
-    status: "inactive",
-    ctaLink: "/service-h",
-  },
-];
+// Cache for services to avoid multiple fetches
+let servicesCache: Service[] | null = null;
 
-export function getServiceById(id: string): Service | undefined {
+export async function fetchServices(): Promise<Service[]> {
+  if (servicesCache) {
+    return servicesCache;
+  }
+
+  try {
+    const response = await fetch('/services.json');
+    if (!response.ok) {
+      throw new Error(`Failed to fetch services: ${response.statusText}`);
+    }
+    servicesCache = await response.json();
+    return servicesCache;
+  } catch (error) {
+    console.error('Error fetching services:', error);
+    return [];
+  }
+}
+
+// Clear cache function for when services are updated
+export function clearServicesCache() {
+  servicesCache = null;
+}
+
+export function getServiceById(id: string, services: Service[]): Service | undefined {
   return services.find((service) => service.id === id);
 }
 
 export function filterServices(
+  services: Service[],
   searchQuery: string = "",
   filterStatus: string = "all"
 ): Service[] {

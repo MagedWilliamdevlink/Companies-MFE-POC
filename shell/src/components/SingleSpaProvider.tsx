@@ -4,8 +4,8 @@ import { useEffect } from "react";
 
 export default function SingleSpaProvider() {
   useEffect(() => {
-    import("../single-spa/root-config").then(({ startSingleSpa }) => {
-      startSingleSpa();
+    import("../single-spa/root-config").then(async ({ startSingleSpa }) => {
+      await startSingleSpa();
     });
   }, []);
 
