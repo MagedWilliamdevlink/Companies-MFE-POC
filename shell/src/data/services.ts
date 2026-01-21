@@ -25,8 +25,9 @@ export async function fetchServices(): Promise<Service[]> {
     if (!response.ok) {
       throw new Error(`Failed to fetch services: ${response.statusText}`);
     }
-    servicesCache = await response.json();
-    return servicesCache;
+    const data = await response.json();
+    servicesCache = data;
+    return servicesCache || [];
   } catch (error) {
     console.error('Error fetching services:', error);
     return [];
