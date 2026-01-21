@@ -51,12 +51,15 @@ export default function RootLayout({
               (async function() {
                 try {
                   // Try config server first, fallback to local
+                  const configServerUrl = '${process.env.NEXT_PUBLIC_SERVICE_JSON || 'http://localhost:3001/services.json'}';
+                  const fallbackUrl = '/services.json';
+                  
                   let response;
                   try {
-                    response = await fetch('http://localhost:3001/services.json');
+                    response = await fetch(configServerUrl);
                   } catch (error) {
                     console.warn('Config server not available, falling back to local services.json');
-                    response = await fetch('/services.json');
+                    response = await fetch(fallbackUrl);
                   }
                   
                   const services = await response.json();

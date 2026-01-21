@@ -22,7 +22,7 @@ export async function fetchServices(): Promise<Service[]> {
 
   try {
     // Try to fetch from the static config server first, fallback to Next.js public folder
-    const configServerUrl = 'http://localhost:3001/services.json';
+    const configServerUrl = process.env.NEXT_PUBLIC_SERVICE_JSON || 'http://localhost:3001/services.json';
     const fallbackUrl = '/services.json';
     
     let response;
