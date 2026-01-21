@@ -72,10 +72,16 @@ export default function RootLayout({
                       return acc;
                     }, {});
                   
+                  console.log('Adding microApp imports to SystemJS:', microAppImports);
+                  
                   // Add dynamic imports to SystemJS
                   System.addImportMap({
                     imports: microAppImports
                   });
+                  
+                  // Verify import map was added
+                  console.log('SystemJS import map after adding services:', System.getImportMap ? System.getImportMap() : 'getImportMap not available');
+                  
                 } catch (error) {
                   console.error('Failed to load dynamic services import map:', error);
                 }

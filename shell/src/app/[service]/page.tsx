@@ -27,6 +27,59 @@ export default function ServicePage() {
     loadService();
   }, [service]);
 
+  // Re-register the app when the service page loads to ensure correct mount point
+  useEffect(() => {
+    if (!loading && serviceData) {
+      console.log(`Service page loaded for: ${serviceData.hostInfo.org}`);
+      console.log(`Current pathname: ${window.location.pathname}`);
+      console.log(`Service ctaLink: ${serviceData.ctaLink}`);
+      
+      // Small delay to ensure the mount point DOM element is ready
+      setTimeout(async () => {
+        const mountPointId = `single-spa-application:${serviceData.hostInfo.org}`;
+        const mountPoint = document.getElementById(mountPointId);
+        
+        if (mountPoint) {
+          console.log(`Mount point ready: ${mountPointId}`, mountPoint);
+          console.log(`Mount point parent:`, mountPoint.parentElement);
+          console.log(`Mount point dimensions:`, {
+            width: mountPoint.offsetWidth,
+            height: mountPoint.offsetHeight,
+            display: window.getComputedStyle(mountPoint).display
+          });
+          
+          // Clear any existing content
+          mountPoint.innerHTML = '';
+          
+          // Import and re-register the app to ensure it uses the correct mount point
+          const { reregisterApp } = await import("../../single-spa/root-config");
+          await reregisterApp(serviceData.hostInfo.org);
+          
+          // Check if content appears after a delay
+          setTimeout(() => {
+            console.log(`Mount point content after 2s:`, mountPoint.innerHTML);
+            console.log(`Mount point children:`, mountPoint.children.length);
+          }, 2000);
+        } else {
+          console.error(`Mount point not found: ${mountPointId}`);
+        }
+      }, 100);
+    }
+  }, [loading, serviceData]);
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      if (serviceData) {
+        const mountPointId = `single-spa-application:${serviceData.hostInfo.org}`;
+        const mountPoint = document.getElementById(mountPointId);
+        if (mountPoint) {
+          mountPoint.innerHTML = '';
+        }
+      }
+    };
+  }, [serviceData]);
+
   const breadcrumbs = [
     { name: "الرئيسية", href: "/" },
     { name: "الخدمات", href: "/services" },
@@ -58,6 +111,8 @@ export default function ServicePage() {
         <div
           id={mountPointId}
           className="h-full w-full"
+          data-service={service}
+          data-org={serviceData?.hostInfo?.org}
         />
       </div>
     </div>
