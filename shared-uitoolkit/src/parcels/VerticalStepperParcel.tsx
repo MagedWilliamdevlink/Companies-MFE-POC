@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOMClient from "react-dom/client";
 import singleSpaReact from "single-spa-react";
-import VerticalStepper from "../../../components/shared/VerticalStepper";
+import VerticalStepper from "../../../shell/src/components/shared/VerticalStepper";
 
 export const VerticalStepperParcel = singleSpaReact({
   React,

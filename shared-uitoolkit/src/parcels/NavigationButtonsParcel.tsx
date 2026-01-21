@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOMClient from "react-dom/client";
 import singleSpaReact from "single-spa-react";
-import NavigationButtons from "../components/NavigationButtons";
+import NavigationButtons from "../../../shell/src/components/shared/NavigationButtons";
 
 export const NavigationButtonsParcel = singleSpaReact({
   React,

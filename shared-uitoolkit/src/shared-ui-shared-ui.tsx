@@ -17,32 +17,32 @@ export { FormSelectParcel } from "./parcels/FormSelectParcel";
 export { PaymentTableParcel } from "./parcels/PaymentTableParcel";
 
 // Export React components for direct import (React-to-React only)
-export { default as Button } from "./components/Button";
-export type { ButtonProps } from "./components/Button";
+export { default as Button } from "../../shell/src/components/shared/Button";
+export type { ButtonProps } from "../../shell/src/components/shared/Button";
 
-export { default as VerticalStepper } from "../../components/shared/VerticalStepper";
+export { default as VerticalStepper } from "../../shell/src/components/shared/VerticalStepper";
 export type {
   VerticalStepperProps,
   StepItem,
-} from "../../components/shared/VerticalStepper";
-export { default as NavigationButtons } from "./components/NavigationButtons";
-export type { NavigationButtonsProps } from "./components/NavigationButtons";
+} from "../../shell/src/components/shared/VerticalStepper";
+export { default as NavigationButtons } from "../../shell/src/components/shared/NavigationButtons";
+export type { NavigationButtonsProps } from "../../shell/src/components/shared/NavigationButtons";
 
 // Form components
-export { default as FormLabel } from "./components/FormLabel";
-export type { FormLabelProps } from "./components/FormLabel";
-export { default as FormInput } from "./components/FormInput";
-export type { FormInputProps } from "./components/FormInput";
-export { default as FormSelect } from "./components/FormSelect";
-export type { FormSelectProps, SelectOption } from "./components/FormSelect";
+export { default as FormLabel } from "../../shell/src/components/shared/FormLabel";
+export type { FormLabelProps } from "../../shell/src/components/shared/FormLabel";
+export { default as FormInput } from "../../shell/src/components/shared/FormInput";
+export type { FormInputProps } from "../../shell/src/components/shared/FormInput";
+export { default as FormSelect } from "../../shell/src/components/shared/FormSelect";
+export type { FormSelectProps, SelectOption } from "../../shell/src/components/shared/FormSelect";
 
 // Table component
-export { default as PaymentTable } from "./components/PaymentTable";
+export { default as PaymentTable } from "../../shell/src/components/shared/PaymentTable";
 export type {
   PaymentTableProps,
   PaymentRecord,
   PaymentStatus,
-} from "./components/PaymentTable";
+} from "../../shell/src/components/shared/PaymentTable";
 
 const lifecycles = singleSpaReact({
   React,

@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOMClient from "react-dom/client";
 import singleSpaReact from "single-spa-react";
-import FormInput from "../components/FormInput";
+import FormInput from "../../../shell/src/components/shared/FormInput";
 
 export const FormInputParcel = singleSpaReact({
   React,

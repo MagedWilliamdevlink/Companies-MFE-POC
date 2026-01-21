@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOMClient from "react-dom/client";
 import singleSpaReact from "single-spa-react";
-import PaymentTable from "../components/PaymentTable";
+import PaymentTable from "../../../shell/src/components/shared/PaymentTable";
 
 export const PaymentTableParcel = singleSpaReact({
   React,
