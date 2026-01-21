@@ -50,7 +50,15 @@ export default function RootLayout({
             __html: `
               (async function() {
                 try {
-                  const response = await fetch('/services.json');
+                  // Try config server first, fallback to local
+                  let response;
+                  try {
+                    response = await fetch('http://localhost:3001/services.json');
+                  } catch (error) {
+                    console.warn('Config server not available, falling back to local services.json');
+                    response = await fetch('/services.json');
+                  }
+                  
                   const services = await response.json();
                   
                   const microAppImports = services

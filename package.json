@@ -4,9 +4,13 @@
     "private": true,
     "scripts": {
         "install-all": "concurrently \"npm install --prefix common-components\" \"npm install --prefix mfe-service-a\" \"npm install --prefix shell\" \"npm install --prefix shell/src/shared-ui\"",
-        "start-all": "concurrently \"npm run dev --prefix shell\" \"npm start --prefix common-components\" \"npm start --prefix mfe-service-a\" \"npm start --prefix shell/src/shared-ui\""
+        "build-shell": "npm run build --prefix shell",
+        "start-all-apps": "npm run build-shell && concurrently \"npm start --prefix shell\" \"npm start --prefix common-components\" \"npm start --prefix shell/src/shared-ui\"",
+        "serve-config": "serve -p 3001 --cors",
+        "start-all": "concurrently \"npm run serve-config\" \"npm run start-all-apps\""
     },
     "devDependencies": {
-        "concurrently": "^9.1.2"
+        "concurrently": "^9.1.2",
+        "serve": "^14.2.1"
     }
 }

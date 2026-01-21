@@ -21,7 +21,18 @@ export async function fetchServices(): Promise<Service[]> {
   }
 
   try {
-    const response = await fetch('/services.json');
+    // Try to fetch from the static config server first, fallback to Next.js public folder
+    const configServerUrl = 'http://localhost:3001/services.json';
+    const fallbackUrl = '/services.json';
+    
+    let response;
+    try {
+      response = await fetch(configServerUrl);
+    } catch (error) {
+      console.warn('Config server not available, falling back to local services.json');
+      response = await fetch(fallbackUrl);
+    }
+    
     if (!response.ok) {
       throw new Error(`Failed to fetch services: ${response.statusText}`);
     }
