@@ -2,44 +2,43 @@
 
 import { useParams, useRouter, usePathname } from "next/navigation";
 import { useEffect, useState, useRef } from "react";
-import Breadcrumb from "../../components/Breadcrumb";
-import { fetchServices, getServiceById, Service } from "../../data/services";
+import Breadcrumb from "../../../components/Breadcrumb";
+import { fetchServices, getServiceById, Service } from "../../../data/services";
+import { getRequest } from "../../../utils/requestStorage";
 
-export default function ServicePage() {
+export default function ServiceRequestPage() {
   const params = useParams();
   const router = useRouter();
   const pathname = usePathname();
   const service = params?.service as string;
+  const requestId = params?.requestId as string;
   const [serviceData, setServiceData] = useState<Service | undefined>(undefined);
   const [loading, setLoading] = useState(true);
   const hasRedirected = useRef(false);
 
-  // Redirect to /new if accessing service directly - do this immediately
-  // Check both pathname (from Next.js) and window.location (for manual URL edits)
   useEffect(() => {
-    if (typeof window === 'undefined') return;
-    
-    const currentPath = window.location.pathname;
-    const isBaseServicePath = currentPath === `/${service}` || pathname === `/${service}`;
-    
-    if (isBaseServicePath && !hasRedirected.current) {
-      hasRedirected.current = true;
-      // Use replace to avoid adding to history and prevent back button issues
-      // This preserves the mount point and prevents unmounting
-      router.replace(`/${service}/new`);
-      return;
-    }
-  }, [pathname, service, router]);
-
-  useEffect(() => {
-    // Reset redirect flag when service changes
-    hasRedirected.current = false;
-    
     async function loadService() {
       try {
         const services = await fetchServices();
         const foundService = getServiceById(service, services);
         setServiceData(foundService);
+        
+        // If requestId is "new", this is valid - let the service component handle it
+        if (requestId === "new") {
+          setLoading(false);
+          return;
+        }
+        
+        // Validate that the request exists for non-"new" requestIds
+        if (requestId && requestId !== "new") {
+          const request = getRequest(requestId);
+          if (!request && !hasRedirected.current) {
+            // Request not found, redirect to new
+            hasRedirected.current = true;
+            router.replace(`/${service}/new`);
+            return;
+          }
+        }
       } catch (error) {
         console.error('Failed to load service:', error);
       } finally {
@@ -47,15 +46,17 @@ export default function ServicePage() {
       }
     }
 
+    // Reset redirect flag when service or requestId changes
+    hasRedirected.current = false;
     loadService();
-  }, [service]);
+  }, [service, requestId, router]);
 
   // Re-register the app when the service page loads to ensure correct mount point
   // useEffect(() => {
   //   if (!loading && serviceData) {
-  //     console.log(`Service page loaded for: ${serviceData.hostInfo.org}`);
+  //     console.log(`Service request page loaded for: ${serviceData.hostInfo.org}`);
+  //     console.log(`Request ID: ${requestId}`);
   //     console.log(`Current pathname: ${window.location.pathname}`);
-  //     console.log(`Service ctaLink: ${serviceData.ctaLink}`);
       
   //     // Small delay to ensure the mount point DOM element is ready
   //     setTimeout(async () => {
@@ -64,53 +65,34 @@ export default function ServicePage() {
         
   //       if (mountPoint) {
   //         console.log(`Mount point ready: ${mountPointId}`, mountPoint);
-  //         console.log(`Mount point parent:`, mountPoint.parentElement);
-  //         console.log(`Mount point dimensions:`, {
-  //           width: mountPoint.offsetWidth,
-  //           height: mountPoint.offsetHeight,
-  //           display: window.getComputedStyle(mountPoint).display
-  //         });
           
-  //         // Don't clear innerHTML - let single-spa handle the mounting/unmounting
-  //         // Clearing innerHTML can interfere with React root management
+  //         // Don't clear innerHTML - let single-spa handle mounting/unmounting
+  //         // Clearing innerHTML interferes with React root management
           
-  //         // Import and re-register the app to ensure it uses the correct mount point
-  //         const { reregisterApp } = await import("../../single-spa/root-config");
+  //         // Only re-register if necessary (app is broken or not registered)
+  //         const { reregisterApp } = await import("../../../single-spa/root-config");
   //         await reregisterApp(serviceData.hostInfo.org);
-          
-  //         // Check if content appears after a delay
-  //         setTimeout(() => {
-  //           console.log(`Mount point content after 2s:`, mountPoint.innerHTML);
-  //           console.log(`Mount point children:`, mountPoint.children.length);
-  //         }, 2000);
   //       } else {
   //         console.error(`Mount point not found: ${mountPointId}`);
   //       }
   //     }, 100);
   //   }
-  // }, [loading, serviceData]);
+  // }, [loading, serviceData, requestId]);
 
-  // Cleanup on unmount - but only if we're actually navigating away from the service
-  // Don't clear if we're redirecting to /new (same service, just different route)
+  // Update mount point data attributes when requestId changes
+  // This helps the microfrontend know when to reload/update
   useEffect(() => {
-    return () => {
-      // Don't clear mount point if we're redirecting to /new or to another requestId
-      // This preserves the microfrontend state during navigation within the same service
-      const currentPath = window.location.pathname;
-      const isNavigatingWithinService = 
-        currentPath === `/${service}/new` || 
-        currentPath.startsWith(`/${service}/`) ||
-        hasRedirected.current;
-      
-      if (serviceData && !isNavigatingWithinService) {
-        const mountPointId = `single-spa-application:${serviceData.hostInfo.org}`;
-        const mountPoint = document.getElementById(mountPointId);
-        if (mountPoint) {
-          mountPoint.innerHTML = '';
-        }
+    if (serviceData && !loading) {
+      const mountPointId = `single-spa-application:${serviceData.hostInfo.org}`;
+      const mountPoint = document.getElementById(mountPointId);
+      if (mountPoint) {
+        // Update data attributes to reflect current state
+        mountPoint.setAttribute('data-service', service);
+        mountPoint.setAttribute('data-request-id', requestId || 'new');
+        mountPoint.setAttribute('data-org', serviceData.hostInfo.org);
       }
-    };
-  }, [serviceData, service]);
+    }
+  }, [serviceData, requestId, service, loading]);
 
   const breadcrumbs = [
     { name: "الرئيسية", href: "/" },
@@ -124,8 +106,8 @@ export default function ServicePage() {
     ? `single-spa-application:${serviceData.hostInfo.org}`
     : `single-spa-application:@${service}/${service}`;
 
-  // If we're redirecting, show loading state to prevent flash of empty content
-  const isRedirecting = pathname === `/${service}` && !hasRedirected.current;
+  // Check if we're redirecting
+  const isRedirecting = hasRedirected.current && requestId !== "new";
 
   return (
     <div className="bg-[#F9FAFC]">
@@ -133,10 +115,12 @@ export default function ServicePage() {
       <div className="h-full min-h-full relative">
         {/* Always render mount point div so single-spa can find it from the start */}
         {/* This prevents single-spa from creating placeholder divs */}
+        {/* The data-request-id attribute helps the microfrontend know which request to load */}
         <div
           id={mountPointId}
           className="h-full w-full"
           data-service={service}
+          data-request-id={requestId}
           data-org={serviceData?.hostInfo?.org}
         />
         

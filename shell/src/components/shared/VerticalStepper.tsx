@@ -91,7 +91,7 @@ export default function VerticalStepper({
 
         <Steps
           className="custom-stepper-vertical"
-          direction="vertical"
+          orientation="vertical"
           current={currentStep}
           onChange={onStepChange}
           items={steps}

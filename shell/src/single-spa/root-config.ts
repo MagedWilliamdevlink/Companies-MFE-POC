@@ -32,10 +32,16 @@ export async function startSingleSpa() {
     services
       .filter(service => service.hostType === "microApp")
       .forEach(service => {
+        // Create activeWhen function that matches service base path and any sub-paths
+        const serviceBasePath = service.ctaLink.split('/').slice(0, 2).join('/'); // e.g., "/service-a"
+        const activeWhen = (location: Location) => {
+          return location.pathname.startsWith(serviceBasePath + '/') || location.pathname === serviceBasePath;
+        };
+        
         registerApplication({
           name: service.hostInfo.org,
           app: () => System.import(service.hostInfo.org),
-          activeWhen: [service.ctaLink],
+          activeWhen: activeWhen,
         });
         registeredApps.add(service.hostInfo.org);
       });
@@ -65,13 +71,28 @@ export async function reregisterApp(orgName: string) {
     const appStatus = getAppStatus(orgName);
     console.log(`Current app status: ${appStatus}`);
     
-    if (appStatus !== SKIP_BECAUSE_BROKEN && registeredApps.has(orgName)) {
-      console.log(`Unregistering existing app: ${orgName}`);
-      await unregisterApplication(orgName);
-      registeredApps.delete(orgName);
+    // Check if app is already registered and active
+    if (registeredApps.has(orgName)) {
+      const currentStatus = getAppStatus(orgName);
+      // If app is already mounted and working, don't re-register
+      if (currentStatus === 'MOUNTED' || currentStatus === 'MOUNTING') {
+        console.log(`App ${orgName} is already mounted, skipping re-registration`);
+        return;
+      }
+      
+      // Only unregister if app is in a broken or error state
+      if (currentStatus === SKIP_BECAUSE_BROKEN || currentStatus === 'LOAD_ERROR' || currentStatus === 'SKIP_BECAUSE_BROKEN') {
+        console.log(`Unregistering broken app: ${orgName}`);
+        await unregisterApplication(orgName);
+        registeredApps.delete(orgName);
+      } else {
+        // App is registered but not mounted - let single-spa handle it naturally
+        console.log(`App ${orgName} is registered but not mounted, will mount naturally`);
+        return;
+      }
     }
 
-    // Clean up any existing mount points created by single-spa
+    // Clean up any duplicate mount points
     const mountPointId = `single-spa-application:${orgName}`;
     const existingMountPoints = document.querySelectorAll(`[id="${mountPointId}"]`);
     existingMountPoints.forEach((element, index) => {
@@ -91,7 +112,13 @@ export async function reregisterApp(orgName: string) {
     console.log(`Mount point verified: ${mountPointId}`, mountPoint);
 
     // Re-register the application
-    console.log(`Registering app with activeWhen: ${service.ctaLink}`);
+    // Create activeWhen function that matches service base path and any sub-paths
+    const serviceBasePath = service.ctaLink.split('/').slice(0, 2).join('/'); // e.g., "/service-a"
+    const activeWhen = (location: Location) => {
+      return location.pathname.startsWith(serviceBasePath + '/') || location.pathname === serviceBasePath;
+    };
+    
+    console.log(`Registering app with activeWhen for base path: ${serviceBasePath}`);
     registerApplication({
       name: orgName,
       app: () => {
@@ -104,7 +131,7 @@ export async function reregisterApp(orgName: string) {
           throw error;
         });
       },
-      activeWhen: [service.ctaLink],
+      activeWhen: activeWhen,
     });
 
     registeredApps.add(orgName);

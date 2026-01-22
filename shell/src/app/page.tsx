@@ -57,6 +57,26 @@ export default function Home() {
           />
         </div>
 
+        {/* Quick Actions */}
+        <div className="mb-6 flex justify-end">
+          <Link
+            href="/my-requests"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+          >
+            <span>طلباتي</span>
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <path d="M9 18l6-6-6-6" />
+            </svg>
+          </Link>
+        </div>
+
         {/* Search Bar */}
         <div className="mb-8">
           <SearchBar
