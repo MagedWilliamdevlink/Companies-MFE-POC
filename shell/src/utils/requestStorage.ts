@@ -4,8 +4,14 @@ export interface RequestData {
   serviceId: string;
   serviceName: string;
   companyName: string;
-  status: "تتطلب التوقيع" | "تتطلب الدفع" | "يتطلب التعديل" | "مكتمل" | "قيد المراجعة";
+  status:
+    | "تتطلب التوقيع"
+    | "تتطلب الدفع"
+    | "يتطلب التعديل"
+    | "مكتمل"
+    | "قيد المراجعة";
   creationDate: string;
+  creationTimeStamp: number;
   currentStep: number;
   completedSteps: number[];
   formData: Record<string, any>;
@@ -21,7 +27,7 @@ export function generateRequestId(): string {
 // Get all requests
 export function getAllRequests(): RequestData[] {
   if (typeof window === "undefined") return [];
-  
+
   try {
     const stored = localStorage.getItem(STORAGE_KEY);
     return stored ? JSON.parse(stored) : [];
@@ -40,17 +46,22 @@ export function getRequest(requestId: string): RequestData | null {
 // Save a request
 export function saveRequest(request: RequestData): void {
   if (typeof window === "undefined") return;
-  
+
   try {
     const requests = getAllRequests();
-    const existingIndex = requests.findIndex((r) => r.requestId === request.requestId);
-    
+    const existingIndex = requests.findIndex(
+      (r) => r.requestId === request.requestId,
+    );
+
     if (existingIndex >= 0) {
       requests[existingIndex] = request;
     } else {
-      requests.push(request);
+      requests.push({
+        ...request,
+        creationTimeStamp: Date.now(),
+      });
     }
-    
+
     localStorage.setItem(STORAGE_KEY, JSON.stringify(requests));
   } catch (error) {
     console.error("Error saving request to storage:", error);
@@ -61,7 +72,7 @@ export function saveRequest(request: RequestData): void {
 export function createRequest(
   serviceId: string,
   serviceName: string,
-  companyName: string = "الهلال للأستثمار والتنمية العمرانية"
+  companyName: string = "الهلال للأستثمار والتنمية العمرانية",
 ): RequestData {
   const requestId = generateRequestId();
   const request: RequestData = {
@@ -79,7 +90,7 @@ export function createRequest(
     completedSteps: [],
     formData: {},
   };
-  
+
   saveRequest(request);
   return request;
 }
@@ -88,21 +99,21 @@ export function createRequest(
 export function updateRequestStep(
   requestId: string,
   step: number,
-  formData?: Record<string, any>
+  formData?: Record<string, any>,
 ): void {
   const request = getRequest(requestId);
   if (!request) return;
-  
+
   request.currentStep = step;
   if (formData) {
     request.formData = { ...request.formData, ...formData };
   }
-  
+
   // Mark previous steps as completed
   if (!request.completedSteps.includes(step - 1) && step > 1) {
     request.completedSteps.push(step - 1);
   }
-  
+
   saveRequest(request);
 }
 
@@ -110,4 +121,13 @@ export function updateRequestStep(
 export function getRequestsByService(serviceId: string): RequestData[] {
   const requests = getAllRequests();
   return requests.filter((r) => r.serviceId === serviceId);
+}
+
+export function getRequestsByServiceSortedByTimestamp(
+  serviceId: string,
+): RequestData[] {
+  const requests = getAllRequests();
+  return requests
+    .filter((r) => r.serviceId === serviceId)
+    .sort((a, b) => b.creationTimeStamp - a.creationTimeStamp);
 }
