@@ -1,7 +1,15 @@
 "use client";
 
 import { useState, useMemo, useEffect } from "react";
-import { Table, Input, DatePicker, Select, Button, Dropdown, ConfigProvider } from "antd";
+import {
+  Table,
+  Input,
+  DatePicker,
+  Select,
+  Button,
+  Dropdown,
+  ConfigProvider,
+} from "antd";
 import type { TableColumnsType, TablePaginationConfig } from "antd";
 import { SearchOutlined, MoreOutlined } from "@ant-design/icons";
 import dayjs, { Dayjs } from "dayjs";
@@ -13,7 +21,12 @@ import type { MenuProps } from "antd";
 import { getAllRequests } from "@/utils/requestStorage";
 
 // Request Status Types
-type RequestStatus = "تتطلب التوقيع" | "تتطلب الدفع" | "يتطلب التعديل" | "مكتمل" | "قيد المراجعة";
+type RequestStatus =
+  | "تتطلب التوقيع"
+  | "تتطلب الدفع"
+  | "يتطلب التعديل"
+  | "مكتمل"
+  | "قيد المراجعة";
 
 // Request Data Interface
 interface RequestData {
@@ -27,54 +40,54 @@ interface RequestData {
 
 // Mock Data - Keep for fallback
 const mockRequests: RequestData[] = [
-  {
-    key: "1",
-    requestNumber: "123456789#",
-    serviceName: "التصديق على محاضر الجمعيات العامة ومجالس الإدارة",
-    companyName: "الهلال للأستثمار والتنمية العمرانية",
-    status: "تتطلب التوقيع",
-    creationDate: "2024/7/4",
-  },
-  {
-    key: "2",
-    requestNumber: "123456789#",
-    serviceName: "التصديق على قوائم مجالس الادارة المساهمين/الشركاء/المديرين",
-    companyName: "الهلال للأستثمار والتنمية العمرانية",
-    status: "تتطلب الدفع",
-    creationDate: "2024/7/4",
-  },
-  {
-    key: "3",
-    requestNumber: "456789123#",
-    serviceName: "مراجعة الحسابات السنوية",
-    companyName: "شركة الرؤية الحديثة",
-    status: "تتطلب التوقيع",
-    creationDate: "2024/7/6",
-  },
-  {
-    key: "4",
-    requestNumber: "456789123#",
-    serviceName: "مراجعة الحسابات السنوية",
-    companyName: "شركة الرؤية الحديثة",
-    status: "يتطلب التعديل",
-    creationDate: "2024/7/6",
-  },
-  {
-    key: "5",
-    requestNumber: "789123456#",
-    serviceName: "تسجيل الشركات",
-    companyName: "شركة النور للتجارة",
-    status: "مكتمل",
-    creationDate: "2024/7/8",
-  },
-  {
-    key: "6",
-    requestNumber: "321654987#",
-    serviceName: "تجديد الترخيص",
-    companyName: "شركة المستقبل",
-    status: "قيد المراجعة",
-    creationDate: "2024/7/10",
-  },
+  // {
+  //   key: "1",
+  //   requestNumber: "123456789#",
+  //   serviceName: "التصديق على محاضر الجمعيات العامة ومجالس الإدارة",
+  //   companyName: "الهلال للأستثمار والتنمية العمرانية",
+  //   status: "تتطلب التوقيع",
+  //   creationDate: "2024/7/4",
+  // },
+  // {
+  //   key: "2",
+  //   requestNumber: "123456789#",
+  //   serviceName: "التصديق على قوائم مجالس الادارة المساهمين/الشركاء/المديرين",
+  //   companyName: "الهلال للأستثمار والتنمية العمرانية",
+  //   status: "تتطلب الدفع",
+  //   creationDate: "2024/7/4",
+  // },
+  // {
+  //   key: "3",
+  //   requestNumber: "456789123#",
+  //   serviceName: "مراجعة الحسابات السنوية",
+  //   companyName: "شركة الرؤية الحديثة",
+  //   status: "تتطلب التوقيع",
+  //   creationDate: "2024/7/6",
+  // },
+  // {
+  //   key: "4",
+  //   requestNumber: "456789123#",
+  //   serviceName: "مراجعة الحسابات السنوية",
+  //   companyName: "شركة الرؤية الحديثة",
+  //   status: "يتطلب التعديل",
+  //   creationDate: "2024/7/6",
+  // },
+  // {
+  //   key: "5",
+  //   requestNumber: "789123456#",
+  //   serviceName: "تسجيل الشركات",
+  //   companyName: "شركة النور للتجارة",
+  //   status: "مكتمل",
+  //   creationDate: "2024/7/8",
+  // },
+  // {
+  //   key: "6",
+  //   requestNumber: "321654987#",
+  //   serviceName: "تجديد الترخيص",
+  //   companyName: "شركة المستقبل",
+  //   status: "قيد المراجعة",
+  //   creationDate: "2024/7/10",
+  // },
 ];
 
 // Status Badge Colors
@@ -83,7 +96,7 @@ const getStatusColor = (status: RequestStatus): string => {
     "تتطلب التوقيع": "#fa8c16", // Orange
     "تتطلب الدفع": "#fa8c16", // Orange
     "يتطلب التعديل": "#fa8c16", // Orange
-    "مكتمل": "#52c41a", // Green
+    مكتمل: "#52c41a", // Green
     "قيد المراجعة": "#1890ff", // Blue
   };
   return statusColors[status] || "#d9d9d9";
@@ -94,7 +107,9 @@ export default function MyRequestsPage() {
   const [requestNumber, setRequestNumber] = useState("");
   const [dateFrom, setDateFrom] = useState<Dayjs | null>(null);
   const [dateTo, setDateTo] = useState<Dayjs | null>(null);
-  const [requestStatus, setRequestStatus] = useState<string | undefined>(undefined);
+  const [requestStatus, setRequestStatus] = useState<string | undefined>(
+    undefined,
+  );
   const [companyName, setCompanyName] = useState<string | undefined>(undefined);
   const [serviceType, setServiceType] = useState<string | undefined>(undefined);
   const [currentPage, setCurrentPage] = useState(1);
@@ -115,7 +130,7 @@ export default function MyRequestsPage() {
           status: req.status,
           creationDate: req.creationDate,
         }));
-        
+
         // Merge with mock data (for now, later remove mock data)
         setRequests([...formattedRequests, ...mockRequests]);
       } catch (error) {
@@ -123,21 +138,21 @@ export default function MyRequestsPage() {
         setRequests(mockRequests);
       }
     };
-    
+
     loadRequests();
-    
+
     // Refresh requests when storage changes
     const handleStorageChange = () => {
       loadRequests();
     };
-    
-    window.addEventListener('storage', handleStorageChange);
+
+    window.addEventListener("storage", handleStorageChange);
     // Also listen to custom event for same-tab updates
-    window.addEventListener('requestUpdated', handleStorageChange);
-    
+    window.addEventListener("requestUpdated", handleStorageChange);
+
     return () => {
-      window.removeEventListener('storage', handleStorageChange);
-      window.removeEventListener('requestUpdated', handleStorageChange);
+      window.removeEventListener("storage", handleStorageChange);
+      window.removeEventListener("requestUpdated", handleStorageChange);
     };
   }, []);
 
@@ -151,15 +166,24 @@ export default function MyRequestsPage() {
   ];
 
   const companyOptions = [
-    { value: "الهلال للأستثمار والتنمية العمرانية", label: "الهلال للأستثمار والتنمية العمرانية" },
+    {
+      value: "الهلال للأستثمار والتنمية العمرانية",
+      label: "الهلال للأستثمار والتنمية العمرانية",
+    },
     { value: "شركة الرؤية الحديثة", label: "شركة الرؤية الحديثة" },
     { value: "شركة النور للتجارة", label: "شركة النور للتجارة" },
     { value: "شركة المستقبل", label: "شركة المستقبل" },
   ];
 
   const serviceTypeOptions = [
-    { value: "التصديق على محاضر الجمعيات العامة ومجالس الإدارة", label: "التصديق على محاضر الجمعيات العامة ومجالس الإدارة" },
-    { value: "التصديق على قوائم مجالس الادارة المساهمين/الشركاء/المديرين", label: "التصديق على قوائم مجالس الادارة المساهمين/الشركاء/المديرين" },
+    {
+      value: "التصديق على محاضر الجمعيات العامة ومجالس الإدارة",
+      label: "التصديق على محاضر الجمعيات العامة ومجالس الإدارة",
+    },
+    {
+      value: "التصديق على قوائم مجالس الادارة المساهمين/الشركاء/المديرين",
+      label: "التصديق على قوائم مجالس الادارة المساهمين/الشركاء/المديرين",
+    },
     { value: "مراجعة الحسابات السنوية", label: "مراجعة الحسابات السنوية" },
     { value: "تسجيل الشركات", label: "تسجيل الشركات" },
     { value: "تجديد الترخيص", label: "تجديد الترخيص" },
@@ -171,7 +195,7 @@ export default function MyRequestsPage() {
 
     if (requestNumber) {
       filtered = filtered.filter((req) =>
-        req.requestNumber.toLowerCase().includes(requestNumber.toLowerCase())
+        req.requestNumber.toLowerCase().includes(requestNumber.toLowerCase()),
       );
     }
 
@@ -202,7 +226,15 @@ export default function MyRequestsPage() {
     }
 
     return filtered;
-  }, [requests, requestNumber, dateFrom, dateTo, requestStatus, companyName, serviceType]);
+  }, [
+    requests,
+    requestNumber,
+    dateFrom,
+    dateTo,
+    requestStatus,
+    companyName,
+    serviceType,
+  ]);
 
   // Reset filters
   const handleReset = () => {
@@ -242,15 +274,17 @@ export default function MyRequestsPage() {
       width: 150,
       render: (text: string, record: RequestData) => {
         // Extract service ID from requestNumber if it's a requestId format
-        const isRequestId = text.startsWith('REQ-');
+        const isRequestId = text.startsWith("REQ-");
         if (isRequestId) {
           // Extract service ID from the request (we need to get it from storage)
           const storedRequests = getAllRequests();
-          const storedRequest = storedRequests.find(r => r.requestId === text);
+          const storedRequest = storedRequests.find(
+            (r) => r.requestId === text,
+          );
           if (storedRequest) {
             return (
-              <Link 
-                href={`/${storedRequest.serviceId}/${text}`}
+              <Link
+                href={`/services/${storedRequest.serviceId}/${text}`}
                 className="text-blue-600 hover:text-blue-800 hover:underline"
               >
                 {text}

@@ -24,7 +24,7 @@ function ServicesContent() {
         const fetchedServices = await fetchServices();
         setServices(fetchedServices);
       } catch (error) {
-        console.error('Failed to load services:', error);
+        console.error("Failed to load services:", error);
       } finally {
         setLoading(false);
       }
@@ -67,7 +67,7 @@ function ServicesContent() {
           {filteredServices.length > 0 ? (
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               {filteredServices.map((service) => (
-                <Link key={service.id} href={service.ctaLink}>
+                <Link key={service.id} href={`services/${service.ctaLink}`}>
                   <ServiceCard
                     title={service.title}
                     description={service.description}

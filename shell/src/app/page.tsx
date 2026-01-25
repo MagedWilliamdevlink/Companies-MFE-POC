@@ -22,7 +22,7 @@ export default function Home() {
         const fetchedServices = await fetchServices();
         setServices(fetchedServices);
       } catch (error) {
-        console.error('Failed to load services:', error);
+        console.error("Failed to load services:", error);
       } finally {
         setLoading(false);
       }
@@ -90,11 +90,10 @@ export default function Home() {
           {featuredServices.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {featuredServices.map((service) => (
-                <Link key={service.id} href={service.ctaLink}>
+                <Link key={service.id} href={`services${service.ctaLink}`}>
                   <ServiceCard
                     title={service.title}
                     description={service.description}
-                    ctaLink={service.ctaLink}
                   />
                 </Link>
               ))}

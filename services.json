@@ -5,7 +5,7 @@
     "description": "إصدار وتجديد التراخيص الإلكترونية للمنشآت والشركات بسهولة",
     "category": "تراخيص",
     "status": "active",
-    "ctaLink": "/service-a/new",
+    "ctaLink": "/new/service-a",
     "hostType": "microApp",
     "hostInfo": {
       "org": "@service-a/service-a",
