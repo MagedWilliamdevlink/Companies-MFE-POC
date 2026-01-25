@@ -1,14 +1,36 @@
 "use client";
 
-import { getRequestsByServiceSortedByTimestamp } from "@/utils/requestStorage";
+import { fetchServices, getServiceById } from "@/data/services";
+import {
+  createRequest,
+  getRequestsByServiceSortedByTimestamp,
+} from "@/utils/requestStorage";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+
+const createNewService = (serviceID, router) => {
+  fetchServices().then((services) => {
+    const getSevice = getServiceById(serviceID, services);
+    console.log(getSevice);
+    const generatedRequest = createRequest(
+      getSevice?.id,
+      getSevice?.title,
+      getSevice?.category,
+    );
+    console.log(generatedRequest);
+    router.push(
+      `/services/${generatedRequest.serviceId}/${generatedRequest.requestId}`,
+    );
+  });
+};
 
 export default function ApplyToService() {
   const params = useParams<{ serviceID: string }>();
   const { serviceID } = params;
   const [serviceAlreadyExists, setServiceAlreadyExists] = useState({});
+  const router = useRouter();
+
   useEffect(() => {
     // check if a service already exists
     (() => {
@@ -19,8 +41,7 @@ export default function ApplyToService() {
 
   return (
     <>
-      ima about to apply to service {serviceID}
-      {serviceAlreadyExists.hasOwnProperty("serviceId") && (
+      {serviceAlreadyExists.hasOwnProperty("serviceId") ? (
         <>
           <div>you already registered in this service, want to continue?</div>
           <Link
@@ -28,6 +49,14 @@ export default function ApplyToService() {
           >
             continue the request
           </Link>
+        </>
+      ) : (
+        <>
+          Terms and Conditions: -----
+          <br />
+          <button onClick={() => createNewService(serviceID, router)}>
+            Start service
+          </button>
         </>
       )}
     </>
