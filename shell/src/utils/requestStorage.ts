@@ -5,6 +5,7 @@ export interface RequestData {
   serviceName: string;
   companyName: string;
   status:
+    | ""
     | "تتطلب التوقيع"
     | "تتطلب الدفع"
     | "يتطلب التعديل"
@@ -80,7 +81,8 @@ export function createRequest(
     serviceId,
     serviceName,
     companyName,
-    status: "تتطلب التوقيع",
+    status: "",
+    creationTimeStamp: Date.now(),
     creationDate: new Date().toLocaleDateString("ar-EG", {
       year: "numeric",
       month: "numeric",

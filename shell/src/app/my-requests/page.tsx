@@ -129,6 +129,7 @@ export default function MyRequestsPage() {
           companyName: req.companyName,
           status: req.status,
           creationDate: req.creationDate,
+          creationTimeStamp: req.creationTimeStamp,
         }));
 
         // Merge with mock data (for now, later remove mock data)

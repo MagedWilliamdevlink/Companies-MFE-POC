@@ -12,6 +12,18 @@ export { NavigationButtonsParcel } from "./parcels/NavigationButtonsParcel";
 export { FormLabelParcel } from "./parcels/FormLabelParcel";
 export { FormInputParcel } from "./parcels/FormInputParcel";
 export { FormSelectParcel } from "./parcels/FormSelectParcel";
+export { FormParcel } from "./parcels/FormParcel";
+
+export {
+  default as Form,
+  useForm,
+  useFormInstance,
+  useWatch,
+  Item as FormItem,
+  List as FormList,
+  ErrorList as FormErrorList,
+  Provider as FormProvider,
+} from "../../shell/src/components/shared/Form";
 
 // Table parcel
 export { PaymentTableParcel } from "./parcels/PaymentTableParcel";
@@ -34,7 +46,10 @@ export type { FormLabelProps } from "../../shell/src/components/shared/FormLabel
 export { default as FormInput } from "../../shell/src/components/shared/FormInput";
 export type { FormInputProps } from "../../shell/src/components/shared/FormInput";
 export { default as FormSelect } from "../../shell/src/components/shared/FormSelect";
-export type { FormSelectProps, SelectOption } from "../../shell/src/components/shared/FormSelect";
+export type {
+  FormSelectProps,
+  SelectOption,
+} from "../../shell/src/components/shared/FormSelect";
 
 // Table component
 export { default as PaymentTable } from "../../shell/src/components/shared/PaymentTable";

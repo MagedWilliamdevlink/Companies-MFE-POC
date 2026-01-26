@@ -5,7 +5,7 @@
   "scripts": {
     "install-all": "concurrently \"npm install --prefix common-components\" \"npm install --prefix mfe-service-a\" \"npm install --prefix shell\" \"npm install --prefix shared-uitoolkit\"",
     "build-shell": "npm run build --prefix shell",
-    "start-all-apps": "npm run build-shell && concurrently \"npm start --prefix shell\" \"npm start --prefix common-components\" \"npm start --prefix shared-uitoolkit\"",
+    "start-all-apps": "concurrently \"npm start --prefix common-components\" \"npm start --prefix shared-uitoolkit\"",
     "start-shell": "npm run build-shell && concurrently \"npm start --prefix shell\"",
     "dev-shell": "concurrently \"npm run dev --prefix shell\"",
     "serve-config": "serve -p 3001 --cors",

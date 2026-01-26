@@ -18,7 +18,6 @@ const createNewService = (serviceID, router) => {
       getSevice?.title,
       getSevice?.category,
     );
-    console.log(generatedRequest);
     router.push(
       `/services/${generatedRequest.serviceId}/${generatedRequest.requestId}`,
     );
