@@ -22,7 +22,7 @@ export default function Home() {
         const fetchedServices = await fetchServices();
         setServices(fetchedServices);
       } catch (error) {
-        console.error('Failed to load services:', error);
+        console.error("Failed to load services:", error);
       } finally {
         setLoading(false);
       }
@@ -57,6 +57,26 @@ export default function Home() {
           />
         </div>
 
+        {/* Quick Actions */}
+        <div className="mb-6 flex justify-end">
+          <Link
+            href="/my-requests"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+          >
+            <span>طلباتي</span>
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <path d="M9 18l6-6-6-6" />
+            </svg>
+          </Link>
+        </div>
+
         {/* Search Bar */}
         <div className="mb-8">
           <SearchBar
@@ -70,11 +90,10 @@ export default function Home() {
           {featuredServices.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {featuredServices.map((service) => (
-                <Link key={service.id} href={service.ctaLink}>
+                <Link key={service.id} href={`services${service.ctaLink}`}>
                   <ServiceCard
                     title={service.title}
                     description={service.description}
-                    ctaLink={service.ctaLink}
                   />
                 </Link>
               ))}

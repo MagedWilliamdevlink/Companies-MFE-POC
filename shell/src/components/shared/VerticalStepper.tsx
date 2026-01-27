@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Steps, ConfigProvider } from "antd";
 
 export interface StepItem {
+  id: string;
   title: string;
+  completeon: string;
 }
 
 export interface VerticalStepperProps {
@@ -11,23 +13,22 @@ export interface VerticalStepperProps {
   headerDescription?: string;
   // Steps
   steps?: StepItem[];
-  currentStep?: number;
+  currentStep?: string;
   onStepChange?: (step: number) => void;
 }
 
 const defaultSteps: StepItem[] = [
-  { title: "الخطوة الأولى" },
-  { title: "الخطوة الثانية" },
-  { title: "الخطوة الثالثة" },
-  { title: "الدفع الالكتروني" },
-  { title: "الخطوة الخامسة" },
+  { id: "0", title: "الخطوة الأولى", completeon: "step0" },
+  { id: "1", title: "الخطوة الثانية", completeon: "step1" },
+  { id: "2", title: "الخطوة الثالثة", completeon: "step2" },
+  { id: "3", title: "الدفع الالكتروني", completeon: "step3" },
+  { id: "4", title: "الخطوة الخامسة", completeon: "step4" },
 ];
 
 export default function VerticalStepper({
   headerTitle,
   headerDescription,
   steps = defaultSteps,
-  currentStep = 0,
   onStepChange,
 }: VerticalStepperProps) {
   return (
@@ -91,10 +92,10 @@ export default function VerticalStepper({
 
         <Steps
           className="custom-stepper-vertical"
-          direction="vertical"
-          current={currentStep}
+          orientation="vertical"
           onChange={onStepChange}
           items={steps}
+          current={-1}
         />
       </div>
     </ConfigProvider>

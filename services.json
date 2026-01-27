@@ -5,11 +5,11 @@
     "description": "إصدار وتجديد التراخيص الإلكترونية للمنشآت والشركات بسهولة",
     "category": "تراخيص",
     "status": "active",
-    "ctaLink": "/service-a",
+    "ctaLink": "/new/service-a",
     "hostType": "microApp",
     "hostInfo": {
       "org": "@service-a/service-a",
-      "url": "https://cdn.jsdelivr.net/gh/MagedWilliamdevlink/Companies-MFE-POC-Service-A@main/dist/service-a-service-a.js"
+      "url": "http://localhost:8080/service-a-service-a.js"
     }
   },
   {
