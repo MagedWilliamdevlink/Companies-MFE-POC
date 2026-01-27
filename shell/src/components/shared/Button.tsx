@@ -17,7 +17,7 @@ const styles: Record<string, React.CSSProperties> = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: "30px",
+    borderRadius: "12px",
     border: "none",
     fontFamily: "'Helvetica Neue LT Arabic', 'Helvetica Neue', sans-serif",
     fontWeight: 700,
@@ -46,7 +46,7 @@ const styles: Record<string, React.CSSProperties> = {
   },
   md: {
     height: "50px",
-    fontSize: "20px",
+    fontSize: "18px",
     padding: "5px 24px",
   },
   lg: {

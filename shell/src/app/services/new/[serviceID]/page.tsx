@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@/components/shared";
 import { fetchServices, getServiceById } from "@/data/services";
 import {
   createRequest,
@@ -35,6 +36,8 @@ export default function ApplyToService() {
     (() => {
       const myRequests = getRequestsByServiceSortedByTimestamp(serviceID);
       setServiceAlreadyExists((myRequests.length && myRequests[0]) || {});
+
+      createNewService(serviceID, router);
     })();
   }, [serviceID]);
 
@@ -51,11 +54,21 @@ export default function ApplyToService() {
         </>
       ) : (
         <>
-          Terms and Conditions: -----
-          <br />
-          <button onClick={() => createNewService(serviceID, router)}>
-            Start service
-          </button>
+          <div className="grid grid-cols-2 p-2 max-w-5xl place-self-center">
+            <div>
+              <img src={"/svgs/toc.svg"} />
+              <br />
+              <Button
+                fullWidth={false}
+                onClick={() => createNewService(serviceID, router)}
+              >
+                بدء الخدمة
+              </Button>
+            </div>
+            <div>
+              <img src={"/svgs/requireddocs.svg"} />
+            </div>
+          </div>
         </>
       )}
     </>
