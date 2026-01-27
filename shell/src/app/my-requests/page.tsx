@@ -38,68 +38,28 @@ interface RequestData {
   creationDate: string;
 }
 
-// Mock Data - Keep for fallback
-const mockRequests: RequestData[] = [
-  // {
-  //   key: "1",
-  //   requestNumber: "123456789#",
-  //   serviceName: "التصديق على محاضر الجمعيات العامة ومجالس الإدارة",
-  //   companyName: "الهلال للأستثمار والتنمية العمرانية",
-  //   status: "تتطلب التوقيع",
-  //   creationDate: "2024/7/4",
-  // },
-  // {
-  //   key: "2",
-  //   requestNumber: "123456789#",
-  //   serviceName: "التصديق على قوائم مجالس الادارة المساهمين/الشركاء/المديرين",
-  //   companyName: "الهلال للأستثمار والتنمية العمرانية",
-  //   status: "تتطلب الدفع",
-  //   creationDate: "2024/7/4",
-  // },
-  // {
-  //   key: "3",
-  //   requestNumber: "456789123#",
-  //   serviceName: "مراجعة الحسابات السنوية",
-  //   companyName: "شركة الرؤية الحديثة",
-  //   status: "تتطلب التوقيع",
-  //   creationDate: "2024/7/6",
-  // },
-  // {
-  //   key: "4",
-  //   requestNumber: "456789123#",
-  //   serviceName: "مراجعة الحسابات السنوية",
-  //   companyName: "شركة الرؤية الحديثة",
-  //   status: "يتطلب التعديل",
-  //   creationDate: "2024/7/6",
-  // },
-  // {
-  //   key: "5",
-  //   requestNumber: "789123456#",
-  //   serviceName: "تسجيل الشركات",
-  //   companyName: "شركة النور للتجارة",
-  //   status: "مكتمل",
-  //   creationDate: "2024/7/8",
-  // },
-  // {
-  //   key: "6",
-  //   requestNumber: "321654987#",
-  //   serviceName: "تجديد الترخيص",
-  //   companyName: "شركة المستقبل",
-  //   status: "قيد المراجعة",
-  //   creationDate: "2024/7/10",
-  // },
-];
-
 // Status Badge Colors
 const getStatusColor = (status: RequestStatus): string => {
-  const statusColors: Record<RequestStatus, string> = {
-    "تتطلب التوقيع": "#fa8c16", // Orange
-    "تتطلب الدفع": "#fa8c16", // Orange
-    "يتطلب التعديل": "#fa8c16", // Orange
-    مكتمل: "#52c41a", // Green
-    "قيد المراجعة": "#1890ff", // Blue
-  };
-  return statusColors[status] || "#d9d9d9";
+  if (
+    status.toLocaleLowerCase().includes("requir") ||
+    status.toLocaleLowerCase().includes("need") ||
+    status.toLocaleLowerCase().includes("wait")
+  ) {
+    return {
+      bg: "#FFF3EB",
+      text: "#B5530D",
+    };
+  }
+  if (
+    status.toLocaleLowerCase().includes("complete") ||
+    status.toLocaleLowerCase().includes("succe")
+  ) {
+    return {
+      bg: "#D2FFD4",
+      text: "#065B28",
+    };
+  }
+  return null;
 };
 
 export default function MyRequestsPage() {
@@ -121,22 +81,22 @@ export default function MyRequestsPage() {
     const loadRequests = () => {
       try {
         const storedRequests = getAllRequests();
+        console.log(storedRequests);
         // Convert stored requests to RequestData format
         const formattedRequests: RequestData[] = storedRequests.map((req) => ({
           key: req.requestId,
           requestNumber: req.requestId,
           serviceName: req.serviceName,
           companyName: req.companyName,
-          status: req.status,
+          status: req.currentStep,
           creationDate: req.creationDate,
           creationTimeStamp: req.creationTimeStamp,
         }));
 
         // Merge with mock data (for now, later remove mock data)
-        setRequests([...formattedRequests, ...mockRequests]);
+        setRequests([...formattedRequests]);
       } catch (error) {
         console.error("Error loading requests:", error);
-        setRequests(mockRequests);
       }
     };
 
@@ -215,6 +175,8 @@ export default function MyRequestsPage() {
     }
 
     if (requestStatus) {
+      // console.log(requestStatus);
+      // filtered = requestStatus;
       filtered = filtered.filter((req) => req.status === requestStatus);
     }
 
@@ -321,9 +283,11 @@ export default function MyRequestsPage() {
           type="primary"
           size="small"
           style={{
-            backgroundColor: getStatusColor(status),
-            borderColor: getStatusColor(status),
-            color: "#fff",
+            backgroundColor:
+              getStatusColor(status) && getStatusColor(status).bg,
+            borderColor: getStatusColor(status) && getStatusColor(status).bg,
+            color: getStatusColor(status) && getStatusColor(status).text,
+            boxShadow: "none",
             fontWeight: 500,
           }}
         >

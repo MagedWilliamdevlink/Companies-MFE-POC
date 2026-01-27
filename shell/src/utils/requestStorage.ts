@@ -13,7 +13,7 @@ export interface RequestData {
     | "قيد المراجعة";
   creationDate: string;
   creationTimeStamp: number;
-  currentStep: number;
+  currentStep: string;
   completedSteps: number[];
   formData: Record<string, any>;
 }
@@ -25,16 +25,183 @@ export function generateRequestId(): string {
   return `REQ-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 }
 
-// Get all requests
-export function getAllRequests(): RequestData[] {
-  if (typeof window === "undefined") return [];
+// Mock Data - Keep for fallback
+const mockRequests = [
+  {
+    requestId: "REQ-1769532001800-4nos67ak8",
+    serviceId: "service-a",
+    serviceName: "خدمة التراخيص الإلكترونية",
+    companyName: "تراخيص",
+    status: "",
+    creationTimeStamp: 1769532001806,
+    creationDate: "٢٧‏/١‏/٢٠٢٦",
+    currentStep: "NEW",
+    completedSteps: [],
+    formData: {},
+  },
+  {
+    requestId: "REQ-1769532033417-k92pavr8k",
+    serviceId: "service-a",
+    serviceName: "خدمة التراخيص الإلكترونية",
+    companyName: "تراخيص",
+    status: "",
+    creationTimeStamp: 1769532033423,
+    creationDate: "٢٧‏/١‏/٢٠٢٦",
+    currentStep: "awaitingReview",
+    completedSteps: [],
+    formData: {
+      formEntry: {
+        companyName: "sss",
+        companyType: "limited_partnership",
+        activityType: "manufacturing",
+        commercialRegister: "234",
+        capital: "443",
+      },
+    },
+    machineSnapshot: {
+      status: "active",
+      context: {
+        isFormValid: true,
+        isReviewed: false,
+        isPaymentCompleted: false,
+        isShippingValid: false,
+        isRequestComplete: false,
+      },
+      value: "awaitingReview",
+      children: {},
+      historyValue: {},
+      tags: [],
+    },
+  },
+  {
+    requestId: "REQ-1769532050293-1jtfmcuob",
+    serviceId: "service-a",
+    serviceName: "خدمة التراخيص الإلكترونية",
+    companyName: "تراخيص",
+    status: "",
+    creationTimeStamp: 1769532050293,
+    creationDate: "٢٧‏/١‏/٢٠٢٦",
+    currentStep: "paymentRequired",
+    completedSteps: [],
+    formData: {
+      formEntry: {
+        companyName: "sssss",
+        companyType: "llc",
+        activityType: "manufacturing",
+        commercialRegister: "222",
+        capital: "22",
+      },
+      verificationStep: {
+        verified: true,
+      },
+    },
+    machineSnapshot: {
+      status: "active",
+      context: {
+        isFormValid: true,
+        isReviewed: true,
+        isPaymentCompleted: false,
+        isShippingValid: false,
+        isRequestComplete: false,
+      },
+      value: "paymentRequired",
+      children: {},
+      historyValue: {},
+      tags: [],
+    },
+  },
+  {
+    requestId: "REQ-1769532072352-8k070urr7",
+    serviceId: "service-a",
+    serviceName: "خدمة التراخيص الإلكترونية",
+    companyName: "تراخيص",
+    status: "",
+    creationTimeStamp: 1769532072353,
+    creationDate: "٢٧‏/١‏/٢٠٢٦",
+    currentStep: "shippingRequired",
+    completedSteps: [],
+    formData: {
+      formEntry: {
+        companyName: "sss",
+        companyType: "joint_stock",
+        activityType: "manufacturing",
+        commercialRegister: "222",
+        capital: "222",
+      },
+      verificationStep: {
+        verified: true,
+      },
+    },
+    machineSnapshot: {
+      status: "active",
+      context: {
+        isFormValid: true,
+        isReviewed: true,
+        isPaymentCompleted: true,
+        isShippingValid: false,
+        isRequestComplete: false,
+      },
+      value: "shippingRequired",
+      children: {},
+      historyValue: {},
+      tags: [],
+    },
+  },
+  {
+    requestId: "REQ-1769532093864-kdc1ujyg1",
+    serviceId: "service-a",
+    serviceName: "خدمة التراخيص الإلكترونية",
+    companyName: "تراخيص",
+    status: "",
+    creationTimeStamp: 1769532093864,
+    creationDate: "٢٧‏/١‏/٢٠٢٦",
+    currentStep: "completed",
+    completedSteps: [],
+    formData: {
+      formEntry: {
+        companyName: "ssrtasrt",
+        companyType: "joint_stock",
+        activityType: "manufacturing",
+        commercialRegister: "1234",
+        capital: "234",
+      },
+      verificationStep: {
+        verified: true,
+      },
+      shipping: {
+        address: "asrtasrt arst asrt",
+      },
+    },
+    machineSnapshot: {
+      status: "active",
+      context: {
+        isFormValid: true,
+        isReviewed: true,
+        isPaymentCompleted: true,
+        isShippingValid: true,
+        isRequestComplete: true,
+      },
+      value: "completed",
+      children: {},
+      historyValue: {},
+      tags: [],
+    },
+  },
+];
 
+// Get all requests
+export function getAllRequests() {
+  if (typeof window === "undefined") return [];
   try {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    return stored ? JSON.parse(stored) : [];
+    if (localStorage.getItem(STORAGE_KEY)) {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      return stored ? JSON.parse(stored) : [];
+    } else {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(mockRequests));
+      return mockRequests;
+    }
   } catch (error) {
     console.error("Error reading requests from storage:", error);
-    return [];
   }
 }
 
@@ -88,7 +255,7 @@ export function createRequest(
       month: "numeric",
       day: "numeric",
     }),
-    currentStep: 1,
+    currentStep: "NEW",
     completedSteps: [],
     formData: {},
   };

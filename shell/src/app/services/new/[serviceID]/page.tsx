@@ -37,40 +37,27 @@ export default function ApplyToService() {
       const myRequests = getRequestsByServiceSortedByTimestamp(serviceID);
       setServiceAlreadyExists((myRequests.length && myRequests[0]) || {});
 
-      createNewService(serviceID, router);
+      // createNewService(serviceID, router);
     })();
   }, [serviceID]);
 
   return (
     <>
-      {serviceAlreadyExists.hasOwnProperty("serviceId") ? (
-        <>
-          <div>you already registered in this service, want to continue?</div>
-          <Link
-            href={`/services/${serviceAlreadyExists.serviceId}/${serviceAlreadyExists.requestId}`}
+      <div className="grid grid-cols-2 p-2 max-w-5xl place-self-center">
+        <div>
+          <img src={"/svgs/toc.svg"} />
+          <br />
+          <Button
+            fullWidth={false}
+            onClick={() => createNewService(serviceID, router)}
           >
-            continue the request
-          </Link>
-        </>
-      ) : (
-        <>
-          <div className="grid grid-cols-2 p-2 max-w-5xl place-self-center">
-            <div>
-              <img src={"/svgs/toc.svg"} />
-              <br />
-              <Button
-                fullWidth={false}
-                onClick={() => createNewService(serviceID, router)}
-              >
-                بدء الخدمة
-              </Button>
-            </div>
-            <div>
-              <img src={"/svgs/requireddocs.svg"} />
-            </div>
-          </div>
-        </>
-      )}
+            بدء الخدمة
+          </Button>
+        </div>
+        <div>
+          <img src={"/svgs/requireddocs.svg"} />
+        </div>
+      </div>
     </>
   );
 }
