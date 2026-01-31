@@ -22,7 +22,7 @@
     "hostType": "microApp",
     "hostInfo": {
       "org": "@service-b/service-b",
-      "url": "http://localhost:8080/service-b-service-b.js"
+      "url": "http://localhost:8083/service-b-service-b.js"
     }
   },
   {
