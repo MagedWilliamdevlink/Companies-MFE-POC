@@ -33,7 +33,6 @@ export default function ApplyToService() {
       try {
         const services = await fetchServices();
         const service = await getServiceById(serviceID, services);
-        console.log(service);
         setService(service);
         setLoading(false);
       } catch (error) {

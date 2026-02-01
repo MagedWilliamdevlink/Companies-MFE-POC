@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { Collapse, ConfigProvider, theme } from "antd";
 import {
-  CheckCircleOutlined,
+  CheckCircleFilled,
   ClockCircleOutlined,
   CloseCircleOutlined,
 } from "@ant-design/icons";
@@ -79,18 +79,35 @@ function getStepState(step: NestedStep, machine: XStateMachine): StepState {
 }
 
 // Get icon for step state (matching Ant Design Steps component icons)
-function getStepIcon(state: StepState, tokens: ReturnType<typeof theme.useToken>["token"]) {
+function getStepIcon(
+  state: StepState,
+  tokens: ReturnType<typeof theme.useToken>["token"],
+) {
   const iconSize = tokens.fontSizeLG;
-  
+
   switch (state) {
     case "reject":
-      return <CloseCircleOutlined style={{ color: tokens.colorError, fontSize: iconSize }} />;
+      return (
+        <CloseCircleOutlined
+          style={{ color: tokens.colorError, fontSize: iconSize }}
+        />
+      );
     case "complete":
-      return <CheckCircleOutlined style={{ color: tokens.colorTextDescription, fontSize: iconSize }} />;
+      return (
+        <CheckCircleFilled style={{ color: "#54B5A6", fontSize: iconSize }} />
+      );
     case "current":
-      return <ClockCircleOutlined style={{ color: tokens.colorPrimary, fontSize: iconSize }} />;
+      return (
+        <ClockCircleOutlined
+          style={{ color: tokens.colorPrimary, fontSize: iconSize }}
+        />
+      );
     default:
-      return <ClockCircleOutlined style={{ color: tokens.colorBorder, fontSize: iconSize }} />;
+      return (
+        <ClockCircleOutlined
+          style={{ color: tokens.colorBorder, fontSize: iconSize }}
+        />
+      );
   }
 }
 
