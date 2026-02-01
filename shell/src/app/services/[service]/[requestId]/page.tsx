@@ -57,34 +57,6 @@ export default function ServiceRequestPage() {
     loadService();
   }, [service, requestId, router]);
 
-  // Re-register the app when the service page loads to ensure correct mount point
-  // useEffect(() => {
-  //   if (!loading && serviceData) {
-  //     console.log(`Service request page loaded for: ${serviceData.hostInfo.org}`);
-  //     console.log(`Request ID: ${requestId}`);
-  //     console.log(`Current pathname: ${window.location.pathname}`);
-
-  //     // Small delay to ensure the mount point DOM element is ready
-  //     setTimeout(async () => {
-  //       const mountPointId = `single-spa-application:${serviceData.hostInfo.org}`;
-  //       const mountPoint = document.getElementById(mountPointId);
-
-  //       if (mountPoint) {
-  //         console.log(`Mount point ready: ${mountPointId}`, mountPoint);
-
-  //         // Don't clear innerHTML - let single-spa handle mounting/unmounting
-  //         // Clearing innerHTML interferes with React root management
-
-  //         // Only re-register if necessary (app is broken or not registered)
-  //         const { reregisterApp } = await import("../../../single-spa/root-config");
-  //         await reregisterApp(serviceData.hostInfo.org);
-  //       } else {
-  //         console.error(`Mount point not found: ${mountPointId}`);
-  //       }
-  //     }, 100);
-  //   }
-  // }, [loading, serviceData, requestId]);
-
   // Update mount point data attributes when requestId changes
   // This helps the microfrontend know when to reload/update
   useEffect(() => {
