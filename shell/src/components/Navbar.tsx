@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
 
 // Icons as components
 function SearchIcon() {
@@ -188,9 +189,6 @@ export default function Navbar() {
               >
                 الخدمات
               </NavLink>
-              <NavLink active={getActiveNav() === "maps"} onClick={() => {}}>
-                خرائط جهات الوصول
-              </NavLink>
             </div>
           </div>
 
@@ -225,11 +223,13 @@ export default function Navbar() {
             </button>
 
             {/* User Menu */}
-            <button className="flex items-center gap-2 px-3 py-2 rounded-lg bg-blue-50 text-blue-700 hover:bg-blue-100 transition-all duration-200">
-              <UserIcon />
-              <span className="text-sm font-medium">أهلا، محمد</span>
-              <ChevronDownIcon />
-            </button>
+            <Link href={"/my-requests"}>
+              <button className="flex items-center gap-2 px-3 py-2 rounded-lg bg-blue-50 text-blue-700 hover:bg-blue-100 transition-all duration-200">
+                <UserIcon />
+                <span className="text-sm font-medium">أهلا، محمد</span>
+                <ChevronDownIcon />
+              </button>
+            </Link>
 
             {/* More Menu */}
             <button className="flex items-center gap-2 px-3 py-2 rounded-lg text-gray-600 hover:bg-gray-50 transition-all duration-200">

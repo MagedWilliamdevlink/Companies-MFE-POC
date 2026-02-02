@@ -38,32 +38,66 @@ interface RequestData {
   creationDate: string;
 }
 
-// Status Badge Colors
-const getStatusColor = (status: RequestStatus): string => {
-  if (
-    status.toLocaleLowerCase().includes("requir") ||
-    status.toLocaleLowerCase().includes("need") ||
-    status.toLocaleLowerCase().includes("wait")
-  ) {
-    return {
-      bg: "#FFF3EB",
-      text: "#B5530D",
-    };
+const stateLookup = {
+  NEW: {
+    text: "طلب جديد",
+    bg: "#00acc1",
+  },
+  applying: {
+    text: "تقديم الطلب",
+    bg: "#ffb300",
+  },
+  underReview: {
+    text: "قيد المراجعة",
+    bg: "#ffb300",
+  },
+  shipping: {
+    text: "الشحن",
+    bg: "#ffb300",
+  },
+  completed: {
+    text: "تم إتمام الطلب",
+    bg: "#54b5a6",
+  },
+  rejected: {
+    text: "تم رفض الطلب",
+    bg: "#EB3E3E",
+  },
+};
+
+const stateToArray = (machineState) => {
+  let state = machineState;
+  if (machineState) {
+    if (typeof machineState !== "string") {
+      try {
+        state = JSON.stringify(machineState)
+          .replaceAll('{"', "")
+          .replaceAll('"}', "")
+          .split('":"');
+      } catch (e) {}
+    } else if (typeof machineState === "string") {
+      state = [state];
+    }
   }
-  if (
-    status.toLocaleLowerCase().includes("complete") ||
-    status.toLocaleLowerCase().includes("succe")
-  ) {
-    return {
-      bg: "#D2FFD4",
-      text: "#065B28",
-    };
+  return state;
+};
+
+const getCurrentStateScope = (state) => {
+  const getState = stateToArray(state);
+
+  if (getState && getState?.length > 0) {
+    if (getState.lenght >= 2) {
+      if (getState[1] === "rejected") {
+        return stateLookup.rejected;
+      }
+    }
+    return stateLookup[getState[0]];
   }
+
   return null;
 };
 
 export default function MyRequestsPage() {
-  const router = useRouter();
   const [requestNumber, setRequestNumber] = useState("");
   const [dateFrom, setDateFrom] = useState<Dayjs | null>(null);
   const [dateTo, setDateTo] = useState<Dayjs | null>(null);
@@ -81,17 +115,19 @@ export default function MyRequestsPage() {
     const loadRequests = () => {
       try {
         const storedRequests = getAllRequests();
-        console.log(storedRequests);
+        // console.log(storedRequests);
         // Convert stored requests to RequestData format
-        const formattedRequests: RequestData[] = storedRequests.map((req) => ({
-          key: req.requestId,
-          requestNumber: req.requestId,
-          serviceName: req.serviceName,
-          companyName: req.companyName,
-          status: req.currentStep,
-          creationDate: req.creationDate,
-          creationTimeStamp: req.creationTimeStamp,
-        }));
+        const formattedRequests: RequestData[] = storedRequests
+          .map((req) => ({
+            key: req.requestId,
+            requestNumber: req.requestId,
+            serviceName: req.serviceName,
+            companyName: req.companyName,
+            status: req.currentStep,
+            creationDate: req.creationDate,
+            creationTimeStamp: req.creationTimeStamp,
+          }))
+          .sort((a, b) => b.creationTimeStamp - a.creationTimeStamp);
 
         // Merge with mock data (for now, later remove mock data)
         setRequests([...formattedRequests]);
@@ -211,10 +247,19 @@ export default function MyRequestsPage() {
   };
 
   // Action menu items
-  const getActionMenuItems = (record: RequestData): MenuProps["items"] => [
+  const getActionMenuItems = (
+    record: RequestData,
+    storedRequest,
+  ): MenuProps["items"] => [
     {
       key: "view",
-      label: "عرض التفاصيل",
+      label: (
+        <Link
+          href={`/services/status/${storedRequest.serviceId}/${storedRequest.requestId}`}
+        >
+          عرض التفاصيل
+        </Link>
+      ),
     },
     {
       key: "edit",
@@ -276,24 +321,26 @@ export default function MyRequestsPage() {
       title: "حالة الطلب",
       dataIndex: "status",
       key: "status",
-      sorter: (a, b) => a.status.localeCompare(b.status),
       width: 180,
-      render: (status: RequestStatus) => (
-        <Button
-          type="primary"
-          size="small"
-          style={{
-            backgroundColor:
-              getStatusColor(status) && getStatusColor(status).bg,
-            borderColor: getStatusColor(status) && getStatusColor(status).bg,
-            color: getStatusColor(status) && getStatusColor(status).text,
-            boxShadow: "none",
-            fontWeight: 500,
-          }}
-        >
-          {status}
-        </Button>
-      ),
+      render: (status: RequestStatus) => {
+        console.log(status, getCurrentStateScope(status));
+
+        return (
+          <Button
+            type="primary"
+            size="small"
+            style={{
+              backgroundColor: getCurrentStateScope(status)?.bg,
+              borderColor: getCurrentStateScope(status)?.bg,
+              color: getCurrentStateScope(status)?.text,
+              boxShadow: "none",
+              fontWeight: 500,
+            }}
+          >
+            {getCurrentStateScope(status)?.text}
+          </Button>
+        );
+      },
     },
     {
       title: "تاريخ الإنشاء",
@@ -309,20 +356,26 @@ export default function MyRequestsPage() {
     {
       title: "",
       key: "action",
+      dataIndex: "requestNumber",
       width: 50,
-      render: (_, record) => (
-        <Dropdown
-          menu={{ items: getActionMenuItems(record) }}
-          trigger={["click"]}
-          placement="bottomLeft"
-        >
-          <Button
-            type="text"
-            icon={<MoreOutlined />}
-            style={{ fontSize: "18px" }}
-          />
-        </Dropdown>
-      ),
+      render: (text: string, record: RequestData) => {
+        // Extract service ID from the request (we need to get it from storage)
+        const storedRequests = getAllRequests();
+        const storedRequest = storedRequests.find((r) => r.requestId === text);
+        return (
+          <Dropdown
+            menu={{ items: getActionMenuItems(record, storedRequest) }}
+            trigger={["click"]}
+            placement="bottomLeft"
+          >
+            <Button
+              type="text"
+              icon={<MoreOutlined />}
+              style={{ fontSize: "18px" }}
+            />
+          </Dropdown>
+        );
+      },
     },
   ];
 

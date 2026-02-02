@@ -1,26 +1,5 @@
 [
   {
-    "id": "service-a",
-    "title": "خدمة التراخيص الإلكترونية",
-    "description": "إصدار وتجديد التراخيص الإلكترونية للمنشآت والشركات بسهولة",
-    "meta": {
-      "requiredDocs": [
-        "- صورة بطاقة الرقم القومي سارية والاطلاع على الأصل",
-        "- تقديم الرخصة التالفة",
-        "- شهادة براءة الذمة شهادة المخالفات سارية"
-      ],
-      "TOC": ["- أن تكون حالة الرخصة سارية وأن تكون رخصة وليست تصريح"]
-    },
-    "category": "تراخيص",
-    "status": "active",
-    "ctaLink": "/new/service-a",
-    "hostType": "microApp",
-    "hostInfo": {
-      "org": "@service-a/service-a",
-      "url": "http://localhost:8080/service-a-service-a.js"
-    }
-  },
-  {
     "id": "service-b",
     "title": "خدمة التصديق على محاضر الجمعيات العامة ومجالس الإدارة والمجمعات العمرانية",
     "description": "تسمح لك هذه الخدمة بالتقديم علي بدل تالف لرخصتك من مكانك",
@@ -60,6 +39,27 @@
     "hostInfo": {
       "org": "@service-c/service-c",
       "url": "http://localhost:8080/service-c-service-c.js"
+    }
+  },
+  {
+    "id": "service-a",
+    "title": "خدمة التراخيص الإلكترونية",
+    "description": "إصدار وتجديد التراخيص الإلكترونية للمنشآت والشركات بسهولة",
+    "meta": {
+      "requiredDocs": [
+        "- صورة بطاقة الرقم القومي سارية والاطلاع على الأصل",
+        "- تقديم الرخصة التالفة",
+        "- شهادة براءة الذمة شهادة المخالفات سارية"
+      ],
+      "TOC": ["- أن تكون حالة الرخصة سارية وأن تكون رخصة وليست تصريح"]
+    },
+    "category": "تراخيص",
+    "status": "active",
+    "ctaLink": "/new/service-a",
+    "hostType": "microApp",
+    "hostInfo": {
+      "org": "@service-a/service-a",
+      "url": "http://localhost:8080/service-a-service-a.js"
     }
   },
   {
