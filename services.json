@@ -1,8 +1,58 @@
 [
   {
+    "id": "service-b",
+    "title": "خدمة التصديق على محاضر الجمعيات العامة ومجالس الإدارة والمجمعات العمرانية",
+    "description": "تهدف خدمة التصديق على القرارات والمحاضر والقوائم إلى اعتماد المستندات الرسمية الصادرة عن الشركات بمختلف أشكالها القانونية، وذلك لضمان صحتها ومطابقتها للأنظمة واللوائح المعمول بها. وتشمل الخدمة التصديق على:",
+    "meta": {
+      "requiredDocs": [
+        "- صورة بطاقة الرقم القومي سارية والاطلاع على الأصل",
+        "- تقديم الرخصة التالفة",
+        "- شهادة براءة الذمة شهادة المخالفات سارية"
+      ],
+      "TOC": ["- أن تكون حالة الرخصة سارية وأن تكون رخصة وليست تصريح"]
+    },
+    "category": "تجاري",
+    "status": "active",
+    "ctaLink": "/new/service-b",
+    "hostType": "microApp",
+    "hostInfo": {
+      "org": "@service-b/service-b",
+      "url": "http://localhost:8083/service-b-service-b.js"
+    }
+  },
+  {
+    "id": "service-c",
+    "title": "خدمة الاستعلام عن المعاملات",
+    "description": "استعلام عن حالة المعاملات والطلبات الخاصة بك",
+    "meta": {
+      "requiredDocs": [
+        "- صورة بطاقة الرقم القومي سارية والاطلاع على الأصل",
+        "- تقديم الرخصة التالفة",
+        "- شهادة براءة الذمة شهادة المخالفات سارية"
+      ],
+      "TOC": ["- أن تكون حالة الرخصة سارية وأن تكون رخصة وليست تصريح"]
+    },
+    "category": "استعلامات",
+    "status": "active",
+    "ctaLink": "/new/service-c",
+    "hostType": "microApp",
+    "hostInfo": {
+      "org": "@service-c/service-c",
+      "url": "http://localhost:8080/service-c-service-c.js"
+    }
+  },
+  {
     "id": "service-a",
     "title": "خدمة التراخيص الإلكترونية",
     "description": "إصدار وتجديد التراخيص الإلكترونية للمنشآت والشركات بسهولة",
+    "meta": {
+      "requiredDocs": [
+        "- صورة بطاقة الرقم القومي سارية والاطلاع على الأصل",
+        "- تقديم الرخصة التالفة",
+        "- شهادة براءة الذمة شهادة المخالفات سارية"
+      ],
+      "TOC": ["- أن تكون حالة الرخصة سارية وأن تكون رخصة وليست تصريح"]
+    },
     "category": "تراخيص",
     "status": "active",
     "ctaLink": "/new/service-a",
@@ -13,38 +63,20 @@
     }
   },
   {
-    "id": "service-b",
-    "title": "خدمة التسجيل التجاري",
-    "description": "تسجيل وإدارة السجلات التجارية إلكترونياً",
-    "category": "تجاري",
-    "status": "active",
-    "ctaLink": "/service-b",
-    "hostType": "microApp",
-    "hostInfo": {
-      "org": "@service-b/service-b",
-      "url": "http://localhost:8080/service-b-service-b.js"
-    }
-  },
-  {
-    "id": "service-c",
-    "title": "خدمة الاستعلام عن المعاملات",
-    "description": "استعلام عن حالة المعاملات والطلبات الخاصة بك",
-    "category": "استعلامات",
-    "status": "active",
-    "ctaLink": "/service-c",
-    "hostType": "microApp",
-    "hostInfo": {
-      "org": "@service-c/service-c",
-      "url": "http://localhost:8080/service-c-service-c.js"
-    }
-  },
-  {
     "id": "service-d",
     "title": "خدمة الدعم الفني",
     "description": "الحصول على الدعم الفني والمساعدة في استخدام الخدمات",
+    "meta": {
+      "requiredDocs": [
+        "- صورة بطاقة الرقم القومي سارية والاطلاع على الأصل",
+        "- تقديم الرخصة التالفة",
+        "- شهادة براءة الذمة شهادة المخالفات سارية"
+      ],
+      "TOC": ["- أن تكون حالة الرخصة سارية وأن تكون رخصة وليست تصريح"]
+    },
     "category": "دعم",
     "status": "pending",
-    "ctaLink": "/service-d",
+    "ctaLink": "/new/service-d",
     "hostType": "microApp",
     "hostInfo": {
       "org": "@service-d/service-d",
@@ -55,9 +87,17 @@
     "id": "service-e",
     "title": "خدمة التقارير والإحصائيات",
     "description": "عرض التقارير والإحصائيات الخاصة بالمعاملات",
+    "meta": {
+      "requiredDocs": [
+        "- صورة بطاقة الرقم القومي سارية والاطلاع على الأصل",
+        "- تقديم الرخصة التالفة",
+        "- شهادة براءة الذمة شهادة المخالفات سارية"
+      ],
+      "TOC": ["- أن تكون حالة الرخصة سارية وأن تكون رخصة وليست تصريح"]
+    },
     "category": "تقارير",
     "status": "active",
-    "ctaLink": "/service-e",
+    "ctaLink": "/new/service-e",
     "hostType": "microApp",
     "hostInfo": {
       "org": "@service-e/service-e",
@@ -68,9 +108,17 @@
     "id": "service-f",
     "title": "خدمة إدارة المستخدمين",
     "description": "إدارة حسابات المستخدمين والصلاحيات",
+    "meta": {
+      "requiredDocs": [
+        "- صورة بطاقة الرقم القومي سارية والاطلاع على الأصل",
+        "- تقديم الرخصة التالفة",
+        "- شهادة براءة الذمة شهادة المخالفات سارية"
+      ],
+      "TOC": ["- أن تكون حالة الرخصة سارية وأن تكون رخصة وليست تصريح"]
+    },
     "category": "إدارة",
     "status": "completed",
-    "ctaLink": "/service-f",
+    "ctaLink": "/new/service-f",
     "hostType": "microApp",
     "hostInfo": {
       "org": "@service-f/service-f",
@@ -81,9 +129,17 @@
     "id": "service-g",
     "title": "خدمة الإشعارات",
     "description": "إدارة الإشعارات والتنبيهات الخاصة بالمعاملات",
+    "meta": {
+      "requiredDocs": [
+        "- صورة بطاقة الرقم القومي سارية والاطلاع على الأصل",
+        "- تقديم الرخصة التالفة",
+        "- شهادة براءة الذمة شهادة المخالفات سارية"
+      ],
+      "TOC": ["- أن تكون حالة الرخصة سارية وأن تكون رخصة وليست تصريح"]
+    },
     "category": "إشعارات",
     "status": "active",
-    "ctaLink": "/service-g",
+    "ctaLink": "/new/service-g",
     "hostType": "microApp",
     "hostInfo": {
       "org": "@service-g/service-g",
@@ -94,9 +150,17 @@
     "id": "service-h",
     "title": "خدمة الدفع الإلكتروني",
     "description": "الدفع الإلكتروني للرسوم والخدمات",
+    "meta": {
+      "requiredDocs": [
+        "- صورة بطاقة الرقم القومي سارية والاطلاع على الأصل",
+        "- تقديم الرخصة التالفة",
+        "- شهادة براءة الذمة شهادة المخالفات سارية"
+      ],
+      "TOC": ["- أن تكون حالة الرخصة سارية وأن تكون رخصة وليست تصريح"]
+    },
     "category": "مالية",
     "status": "inactive",
-    "ctaLink": "/service-h",
+    "ctaLink": "/new/service-h",
     "hostType": "microApp",
     "hostInfo": {
       "org": "@service-h/service-h",

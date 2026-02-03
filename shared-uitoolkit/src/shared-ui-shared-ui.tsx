@@ -6,6 +6,7 @@ import Root from "./root.component";
 // Export parcels for cross-framework usage (as per single-spa docs)
 export { ButtonParcel } from "./parcels/ButtonParcel";
 export { VerticalStepperParcel } from "./parcels/VerticalStepperParcel";
+export { NestedVerticalStepsParcel } from "./parcels/NestedVerticalStepsParcel";
 export { NavigationButtonsParcel } from "./parcels/NavigationButtonsParcel";
 
 // Form component parcels
@@ -37,6 +38,11 @@ export type {
   VerticalStepperProps,
   StepItem,
 } from "../../shell/src/components/shared/VerticalStepper";
+export { default as NestedVerticalSteps } from "../../shell/src/components/shared/NestedVerticalSteps";
+export type {
+  NestedVerticalStepsProps,
+  NestedStep,
+} from "../../shell/src/components/shared/NestedVerticalSteps";
 export { default as NavigationButtons } from "../../shell/src/components/shared/NavigationButtons";
 export type { NavigationButtonsProps } from "../../shell/src/components/shared/NavigationButtons";
 

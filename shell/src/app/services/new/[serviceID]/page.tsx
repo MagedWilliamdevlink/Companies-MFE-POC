@@ -2,11 +2,7 @@
 
 import { Button } from "@/components/shared";
 import { fetchServices, getServiceById } from "@/data/services";
-import {
-  createRequest,
-  getRequestsByServiceSortedByTimestamp,
-} from "@/utils/requestStorage";
-import Link from "next/link";
+import { createRequest } from "@/utils/requestStorage";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -28,24 +24,43 @@ const createNewService = (serviceID, router) => {
 export default function ApplyToService() {
   const params = useParams<{ serviceID: string }>();
   const { serviceID } = params;
-  const [serviceAlreadyExists, setServiceAlreadyExists] = useState({});
   const router = useRouter();
+  const [service, setService] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // check if a service already exists
-    (() => {
-      const myRequests = getRequestsByServiceSortedByTimestamp(serviceID);
-      setServiceAlreadyExists((myRequests.length && myRequests[0]) || {});
+    async function loadService() {
+      try {
+        const services = await fetchServices();
+        const service = await getServiceById(serviceID, services);
+        setService(service);
+        setLoading(false);
+      } catch (error) {
+        console.error("Failed to load service:", error);
+      }
+    }
+    loadService();
+  }, []);
 
-      // createNewService(serviceID, router);
-    })();
-  }, [serviceID]);
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+          <p className="mt-4 text-gray-600">جاري تحميل الخدمات...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>
       <div className="grid grid-cols-2 p-2 max-w-5xl place-self-center">
         <div>
-          <img src={"/svgs/toc.svg"} />
+          {/*<img src={"/svgs/toc.svg"} />*/}
+          <h1 className="font-bold text-2xl">{service?.title}</h1>
+          <p className="font-black">وصف الخدمة</p>
+          <p>{service?.description}</p>
           <br />
           <Button
             fullWidth={false}

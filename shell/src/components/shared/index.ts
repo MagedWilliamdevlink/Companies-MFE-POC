@@ -23,3 +23,6 @@ export type {
 
 export { default as VerticalStepper } from "./VerticalStepper";
 export type { VerticalStepperProps, StepItem } from "./VerticalStepper";
+
+export { default as NestedVerticalSteps } from "./NestedVerticalSteps";
+export type { NestedVerticalStepsProps, NestedStep } from "./NestedVerticalSteps";

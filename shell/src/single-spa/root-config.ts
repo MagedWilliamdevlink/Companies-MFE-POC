@@ -49,12 +49,18 @@ export async function startSingleSpa() {
           return false;
         };
 
-        registerApplication({
-          name: service.hostInfo.org,
-          app: () => System.import(service.hostInfo.org),
-          activeWhen: activeWhen,
-        });
-        registeredApps.add(service.hostInfo.org);
+        console.log(System);
+        try {
+          registerApplication({
+            name: service.hostInfo.org,
+            app: () => System.import(service.hostInfo.org),
+            activeWhen: activeWhen,
+          });
+          registeredApps.add(service.hostInfo.org);
+        } catch (e) {
+          console.error(e);
+          window.location.reload();
+        }
       });
 
     start();

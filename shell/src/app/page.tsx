@@ -93,7 +93,11 @@ export default function Home() {
                 <Link key={service.id} href={`services${service.ctaLink}`}>
                   <ServiceCard
                     title={service.title}
-                    description={service.description}
+                    description={
+                      service.description.length > 100
+                        ? service.description.substring(0, 100) + "..."
+                        : service.description
+                    }
                   />
                 </Link>
               ))}

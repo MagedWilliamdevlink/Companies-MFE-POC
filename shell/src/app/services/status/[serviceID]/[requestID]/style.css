@@ -1,0 +1,137 @@
+.container {
+    display: flex;
+    flex-direction: row-reverse; /* For RTL support */
+    gap: 20px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    direction: rtl;
+}
+
+.main-column {
+    flex: 2;
+}
+.side-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Cards Styling */
+.card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    border: 1px solid #eee;
+}
+
+/* Header & Progress */
+.status-header {
+    text-align: right;
+    margin-bottom: 30px;
+}
+.progress-bar {
+    height: 8px;
+    background: #e0e0e0;
+    border-radius: 4px;
+    margin-top: 10px;
+    overflow: hidden;
+}
+.progress-fill {
+    height: 100%;
+    background: #ff8c00;
+}
+
+/* Timeline Cards */
+.timeline-card {
+    width: 100%;
+    border: 2px solid transparent;
+}
+.green-border {
+    border-color: #54b5a6;
+}
+.yellow-border {
+    border-color: #ffb300;
+}
+.blue-border {
+    border-color: #00acc1;
+}
+.red-border {
+    border-color: #eb3e3e;
+}
+
+.yellow-border .card-header {
+    color: #ffb300;
+}
+
+.blue-border .card-header {
+    color: #00acc1;
+}
+
+.red-border .card-header {
+    color: #eb3e3e;
+}
+
+.card-header .label {
+    color: inherit;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.sub-steps {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.sub-steps li {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+/* Side Details */
+.detail-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+}
+
+.badge-paid {
+    background: #e3f2fd;
+    color: #1565c0;
+    padding: 2px 10px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+}
+
+.total-price {
+    color: #00acc1;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.btn-result {
+    background: #e8f0fe;
+    color: #1a73e8;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+}

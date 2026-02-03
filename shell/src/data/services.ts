@@ -2,10 +2,14 @@ export interface Service {
   id: string;
   title: string;
   description: string;
+  meta: {
+    requiredDocs: [] | string;
+    TOC: [] | string;
+  };
   category: string;
   status: "active" | "inactive" | "pending" | "completed" | "cancelled";
   ctaLink: string;
-  hostType: "microApp" | "external"
+  hostType: "microApp" | "external";
   hostInfo: {
     org: string;
     url: string;
@@ -22,17 +26,21 @@ export async function fetchServices(): Promise<Service[]> {
 
   try {
     // Try to fetch from the static config server first, fallback to Next.js public folder
-    const configServerUrl = process.env.NEXT_PUBLIC_SERVICE_JSON || 'http://localhost:3001/services.json';
-    const fallbackUrl = '/services.json';
-    
+    const configServerUrl =
+      process.env.NEXT_PUBLIC_SERVICE_JSON ||
+      "http://localhost:3001/services.json";
+    const fallbackUrl = "/services.json";
+
     let response;
     try {
       response = await fetch(configServerUrl);
     } catch (error) {
-      console.warn('Config server not available, falling back to local services.json');
+      console.warn(
+        "Config server not available, falling back to local services.json",
+      );
       response = await fetch(fallbackUrl);
     }
-    
+
     if (!response.ok) {
       throw new Error(`Failed to fetch services: ${response.statusText}`);
     }
@@ -40,7 +48,7 @@ export async function fetchServices(): Promise<Service[]> {
     servicesCache = data;
     return servicesCache || [];
   } catch (error) {
-    console.error('Error fetching services:', error);
+    console.error("Error fetching services:", error);
     return [];
   }
 }
@@ -50,21 +58,24 @@ export function clearServicesCache() {
   servicesCache = null;
 }
 
-export function getServiceById(id: string, services: Service[]): Service | undefined {
+export function getServiceById(
+  id: string,
+  services: Service[],
+): Service | undefined {
   return services.find((service) => service.id === id);
 }
 
 export function filterServices(
   services: Service[],
   searchQuery: string = "",
-  filterStatus: string = "all"
+  filterStatus: string = "all",
 ): Service[] {
   let filteredServices = services;
 
   // Apply status filter
   if (filterStatus !== "all") {
     filteredServices = filteredServices.filter(
-      (service) => service.status === filterStatus
+      (service) => service.status === filterStatus,
     );
   }
 
@@ -75,7 +86,7 @@ export function filterServices(
       (service) =>
         service.title.toLowerCase().includes(query) ||
         service.description.toLowerCase().includes(query) ||
-        service.category.toLowerCase().includes(query)
+        service.category.toLowerCase().includes(query),
     );
   }
 
