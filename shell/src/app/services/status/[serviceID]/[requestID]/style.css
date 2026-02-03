@@ -58,9 +58,8 @@
 .blue-border {
     border-color: #00acc1;
 }
-
-.green-border .card-header {
-    color: #54b5a6;
+.red-border {
+    border-color: #eb3e3e;
 }
 
 .yellow-border .card-header {
@@ -69,6 +68,10 @@
 
 .blue-border .card-header {
     color: #00acc1;
+}
+
+.red-border .card-header {
+    color: #eb3e3e;
 }
 
 .card-header .label {

@@ -6,9 +6,12 @@ import { useRouter } from "next/navigation";
 import { getRequest } from "../../../../../utils/requestStorage.ts";
 import "./style.css";
 import { Button } from "@/components/shared";
+import { Collapse, ConfigProvider } from "antd";
 
 import Link from "next/link";
 import InProg from "./inProg";
+import Rejected from "./rejected";
+
 import Done from "./done";
 import { useState } from "react";
 const STORAGE_KEY = "service_requests";
@@ -36,10 +39,13 @@ export default function StatusPage(props) {
 }
 
 function ThePage({ updater }) {
-  const { serviceID, requestID } = useParams();
+  const { requestID } = useParams();
   const request = getRequest(requestID);
+  const machineState = request?.machineSnapshot?.value || null;
 
-  const requestRejected = request?.machineSnapshot?.context?.requestRejected;
+  const requestRejected =
+    machineState === "rejected" ||
+    request?.machineSnapshot?.context?.requestRejected;
   const paymentCompleted = request?.machineSnapshot?.context?.paymentCompleted;
 
   const lastUpdated =
@@ -55,15 +61,11 @@ function ThePage({ updater }) {
     request?.machineSnapshot?.context.Progress.completion || [];
 
   console.log(request?.machineSnapshot?.context?.paymentInfo?.feeItems);
-  const machineState = request?.machineSnapshot?.value || null;
 
   const hasApplied = appliedLogs.length > 0;
   const hasReviewed = reviewedLogs.length > 0;
   const hasShipping = shippingLogs.length > 0;
   const hasCompleted = completedLogs.length > 0 || machineState === "completed";
-
-  // TODO: make is arbitrary
-  const total_steps = 4;
 
   const stateLookup = {
     NEW: {
@@ -91,25 +93,6 @@ function ThePage({ updater }) {
       bg: "#EB3E3E",
     },
   };
-  // const stateLookup = {
-  //   applying: {
-  //     fillInformation: "يرجى ملء بيانات المؤسسة",
-  //     confirmInformation: "تم تأكيد البيانات",
-  //     payment: "الدفع مطلوب"
-  //   },
-  //   underReview: {
-  //     waitingForReviewer: "قيد المراجعة",
-  //     rejected: "تم رفض الطلب",
-  //     approved: "تمت الموافقة على الطلب"
-  //   },
-  //   shipping: {
-  //     enterShippingInfo: "أدخل معلومات الشحن",
-  //     inTransit: "في مرحلة انتقالية",
-  //     delivered: "تم التوصيل"
-  //   },
-  //   "NEW": "طلب جديد",
-  //   "completed": "تم إتمام الطلب",
-  // }
 
   const stateToArray = () => {
     let state = machineState;
@@ -149,11 +132,6 @@ function ThePage({ updater }) {
     return null;
   };
 
-  // const progress = requestRejected
-  //   ? total_steps
-  //   : [hasApplied, hasReviewed, hasShipping].filter((x) => x).length;
-
-  console.log(getCurrentStateScope());
   return (
     <>
       {updater}
@@ -196,156 +174,252 @@ function ThePage({ updater }) {
           <section className="tracking-section">
             <h3 className="font-black text-lg pb-4">تتبع طلبك</h3>
 
-            {hasApplied && (
-              <div className="flex gap-2">
-                <Done />
-                <div className="card timeline-card green-border">
-                  <div className="card-header">
-                    <span className="label">الطلب تحت التقديم</span>
-                  </div>
-                  <ul className="sub-steps">
-                    {appliedLogs.map((log) => (
-                      <li>
-                        {log.eventName}, {log.extra}{" "}
-                        <span>{new Date(log.timestamp).toISOString()}</span>
-                      </li>
-                    ))}
-                  </ul>
+            <ConfigProvider
+              direction="rtl"
+              theme={{
+                token: {
+                  fontFamily: "'Cairo', 'Helvetica Neue', Arial, sans-serif",
+                },
+              }}
+            >
+              {hasApplied && (
+                <div className="flex gap-2 mb-6">
+                  {hasReviewed ? <Done /> : <InProg />}
+                  <Collapse
+                    expandIconPlacement="end"
+                    defaultActiveKey={
+                      hasReviewed ? null : !requestRejected && ["applying"]
+                    }
+                    items={[
+                      {
+                        key: "applying",
+                        label: <span className="label">الطلب تحت التقديم</span>,
+                        children: (
+                          <ul className="sub-steps">
+                            {appliedLogs.map((log, index) => (
+                              <li key={index}>
+                                {log.eventName}, {log.extra}{" "}
+                                <span>
+                                  {new Date(log.timestamp).toISOString()}
+                                </span>
+                              </li>
+                            ))}
+                          </ul>
+                        ),
+                      },
+                    ]}
+                    className={`timeline-card ${hasReviewed ? "green-border" : "yellow-border"} flex-1`}
+                  />
                 </div>
-              </div>
-            )}
+              )}
 
-            {hasReviewed && (
-              <div className="flex gap-2">
-                <InProg />
+              {hasReviewed && (
+                <div className="flex gap-2 mb-6">
+                  {hasShipping ? <Done /> : <InProg />}
 
-                <div className="card timeline-card yellow-border">
-                  <div className="card-header">
-                    <span className="label">الطلب قيد المراجعة</span>
-                  </div>
-                  <ul className="sub-steps">
-                    {reviewedLogs.map((log) => (
-                      <li>
-                        {log.eventName}, {log.extra}{" "}
-                        <span>{new Date(log.timestamp).toISOString()}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  <Collapse
+                    expandIconPlacement="end"
+                    defaultActiveKey={
+                      hasShipping ? null : !requestRejected && ["reviewing"]
+                    }
+                    items={[
+                      {
+                        key: "reviewing",
+                        label: (
+                          <span className="label">الطلب قيد المراجعة</span>
+                        ),
+                        children: (
+                          <ul className="sub-steps">
+                            {reviewedLogs.map((log, index) => (
+                              <li key={index}>
+                                {log.eventName}, {log.extra}{" "}
+                                <span>
+                                  {new Date(log.timestamp).toISOString()}
+                                </span>
+                              </li>
+                            ))}
+                          </ul>
+                        ),
+                      },
+                    ]}
+                    className={`timeline-card ${hasShipping ? "green-border" : "yellow-border"} flex-1`}
+                  />
                 </div>
-              </div>
-            )}
+              )}
 
-            {hasShipping && (
-              <div className="flex gap-2">
-                <InProg />
-                <div className="card timeline-card yellow-border">
-                  <div className="card-header">
-                    <span className="label">الشحنة في الطريق</span>
-                  </div>
-                  <ul className="sub-steps">
-                    {shippingLogs.map((log) => (
-                      <li>
-                        {log.eventName}, {log.extra}{" "}
-                        <span>{new Date(log.timestamp).toISOString()}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            )}
+              {hasShipping && (
+                <div className="flex gap-2 mb-6">
+                  {hasCompleted ? <Done /> : <InProg />}
 
-            {hasCompleted && (
-              <div className="flex gap-2">
-                <Done />
-                <div className="card timeline-card green-border">
-                  <div className="card-header">
-                    <span className="label">تم إتمام الطلب</span>
-                  </div>
-                  <ul className="sub-steps">
-                    {completedLogs.map((log) => (
-                      <li>
-                        {log.eventName}, {log.extra}{" "}
-                        <span>{new Date(log.timestamp).toISOString()}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  <Collapse
+                    expandIconPlacement="end"
+                    defaultActiveKey={
+                      hasCompleted ? null : !requestRejected && ["shipping"]
+                    }
+                    items={[
+                      {
+                        key: "shipping",
+                        label: <span className="label">الشحنة في الطريق</span>,
+                        children: (
+                          <ul className="sub-steps">
+                            {shippingLogs.map((log, index) => (
+                              <li key={index}>
+                                {log.eventName}, {log.extra}{" "}
+                                <span>
+                                  {new Date(log.timestamp).toISOString()}
+                                </span>
+                              </li>
+                            ))}
+                          </ul>
+                        ),
+                      },
+                    ]}
+                    className={`timeline-card ${hasCompleted ? "green-border" : "yellow-border"} flex-1`}
+                  />
                 </div>
-              </div>
-            )}
+              )}
+
+              {hasCompleted && (
+                <div className="flex gap-2 mb-6">
+                  {requestRejected ? <Rejected /> : <Done />}
+                  <Collapse
+                    expandIconPlacement="end"
+                    defaultActiveKey={["completed"]}
+                    items={[
+                      {
+                        key: "completed",
+                        label: (
+                          <span className="label">
+                            {requestRejected
+                              ? "تم رفض الطلب"
+                              : "تم إتمام الطلب"}
+                          </span>
+                        ),
+                        children: (
+                          <ul className="sub-steps">
+                            {completedLogs.map((log, index) => (
+                              <li key={index}>
+                                {log.eventName}, {log.extra}{" "}
+                                <span>
+                                  {new Date(log.timestamp).toISOString()}
+                                </span>
+                              </li>
+                            ))}
+                          </ul>
+                        ),
+                      },
+                    ]}
+                    className={`timeline-card ${requestRejected ? "red-border" : "green-border"} flex-1`}
+                  />
+                </div>
+              )}
+            </ConfigProvider>
           </section>
         </div>
 
         {/* Right Column: Details & Payment */}
         <div className="side-column">
-          <div className="card detail-card">
-            <div className="detail-header">
-              <h4 className="font-black">{request.serviceName}</h4>
-            </div>
-            {request?.creationTimeStamp && (
-              <div className="detail-row">
-                <span>تاريخ الطلب</span>{" "}
-                <span>
-                  {new Date(request.creationTimeStamp).toDateString()}
-                </span>
-              </div>
-            )}
-            <div className="detail-row">
-              <span>رقم الطلب</span> <span>{requestID}</span>
-            </div>
-            {paymentCompleted && (
-              <div className="detail-row">
-                <span>حالة الدفع</span>{" "}
-                <span className="badge-paid">مدفوع</span>
-              </div>
-            )}
-            {hasShipping && (
-              <div className="detail-row">
-                <span>رقم شحنة البريد</span> <span>EKTL0164253EG</span>
-              </div>
-            )}
-          </div>
+          <ConfigProvider
+            direction="rtl"
+            theme={{
+              token: {
+                fontFamily: "'Cairo', 'Helvetica Neue', Arial, sans-serif",
+              },
+            }}
+          >
+            <Collapse
+              expandIconPlacement="end"
+              defaultActiveKey={["request-details"]}
+              items={[
+                {
+                  key: "request-details",
+                  label: <h4 className="font-black">{request.serviceName}</h4>,
+                  children: (
+                    <>
+                      {request?.creationTimeStamp && (
+                        <div className="detail-row">
+                          <span>تاريخ الطلب</span>{" "}
+                          <span>
+                            {new Date(request.creationTimeStamp).toDateString()}
+                          </span>
+                        </div>
+                      )}
+                      <div className="detail-row">
+                        <span>رقم الطلب</span> <span>{requestID}</span>
+                      </div>
+                      {paymentCompleted && (
+                        <div className="detail-row">
+                          <span>حالة الدفع</span>{" "}
+                          <span className="badge-paid">مدفوع</span>
+                        </div>
+                      )}
+                      {hasShipping && (
+                        <div className="detail-row">
+                          <span>رقم شحنة البريد</span>{" "}
+                          <span>EKTL0164253EG</span>
+                        </div>
+                      )}
+                    </>
+                  ),
+                },
+              ]}
+              className="detail-card mb-6"
+            />
 
-          {request?.machineSnapshot?.context?.paymentInfo?.feeItems && (
-            <>
-              <div className="card detail-card">
-                <div className="detail-header">
-                  <h4>تفاصيل الدفع</h4>
-                </div>
-                <ul className="sub-steps">
-                  {request?.machineSnapshot?.context?.paymentInfo?.feeItems.map(
-                    (fee) => (
-                      <li key={fee.label + fee.price}>
-                        <div>{fee.label}</div>
-                        <span>{fee.price}</span>
-                      </li>
+            {request?.machineSnapshot?.context?.paymentInfo?.feeItems && (
+              <Collapse
+                expandIconPlacement="end"
+                defaultActiveKey={["payment-details"]}
+                items={[
+                  {
+                    key: "payment-details",
+                    label: <h4>تفاصيل الدفع</h4>,
+                    children: (
+                      <ul className="sub-steps">
+                        {request?.machineSnapshot?.context?.paymentInfo?.feeItems.map(
+                          (fee) => (
+                            <li key={fee.label + fee.price}>
+                              <div>{fee.label}</div>
+                              <span>{fee.price}</span>
+                            </li>
+                          ),
+                        )}
+                      </ul>
                     ),
-                  )}
-                </ul>
-              </div>
-            </>
-          )}
+                  },
+                ]}
+                className="detail-card mb-6"
+              />
+            )}
 
-          {request?.machineSnapshot?.context?.shippingInfo?.shipping
-            ?.address && (
-            <>
-              <div className="card detail-card">
-                <div className="detail-header">
-                  <h4>تفاصيل الشحنة</h4>
-                </div>
-                <ul className="sub-steps">
-                  <li>
-                    <div>العنوان</div>
-                    <span>
-                      {
-                        request?.machineSnapshot?.context?.shippingInfo
-                          ?.shipping?.address
-                      }
-                    </span>
-                  </li>
-                </ul>
-              </div>
-            </>
-          )}
+            {request?.machineSnapshot?.context?.shippingInfo?.shipping
+              ?.address && (
+              <Collapse
+                expandIconPlacement="end"
+                defaultActiveKey={["shipping-details"]}
+                items={[
+                  {
+                    key: "shipping-details",
+                    label: <h4>تفاصيل الشحنة</h4>,
+                    children: (
+                      <ul className="sub-steps">
+                        <li>
+                          <div>العنوان</div>
+                          <span>
+                            {
+                              request?.machineSnapshot?.context?.shippingInfo
+                                ?.shipping?.address
+                            }
+                          </span>
+                        </li>
+                      </ul>
+                    ),
+                  },
+                ]}
+                className="detail-card mb-6"
+              />
+            )}
+          </ConfigProvider>
         </div>
       </div>
     </>
