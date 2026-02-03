@@ -324,6 +324,28 @@ function ThePage({ updater }) {
               </div>
             </>
           )}
+
+          {request?.machineSnapshot?.context?.shippingInfo?.shipping
+            ?.address && (
+            <>
+              <div className="card detail-card">
+                <div className="detail-header">
+                  <h4>تفاصيل الشحنة</h4>
+                </div>
+                <ul className="sub-steps">
+                  <li>
+                    <div>العنوان</div>
+                    <span>
+                      {
+                        request?.machineSnapshot?.context?.shippingInfo
+                          ?.shipping?.address
+                      }
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </>

@@ -84,7 +84,6 @@ const stateToArray = (machineState) => {
 
 const getCurrentStateScope = (state) => {
   const getState = stateToArray(state);
-
   if (getState && getState?.length > 0) {
     if (getState.lenght >= 2) {
       if (getState[1] === "rejected") {
@@ -323,8 +322,6 @@ export default function MyRequestsPage() {
       key: "status",
       width: 180,
       render: (status: RequestStatus) => {
-        console.log(status, getCurrentStateScope(status));
-
         return (
           <Button
             type="primary"

@@ -28,160 +28,673 @@ export function generateRequestId(): string {
 // Mock Data - Keep for fallback
 const mockRequests = [
   {
-    requestId: "REQ-1769532001800-4nos67ak8",
-    serviceId: "service-a",
-    serviceName: "خدمة التراخيص الإلكترونية",
-    companyName: "تراخيص",
+    requestId: "REQ-1770118051426-pizr4asba",
+    serviceId: "service-b",
+    serviceName:
+      "خدمة التصديق على محاضر الجمعيات العامة ومجالس الإدارة والمجمعات العمرانية",
+    companyName: "تجاري",
     status: "",
-    creationTimeStamp: 1769532001806,
-    creationDate: "٢٧‏/١‏/٢٠٢٦",
+    creationTimeStamp: 1770118051437,
+    creationDate: "٣‏/٢‏/٢٠٢٦",
     currentStep: "NEW",
     completedSteps: [],
     formData: {},
   },
   {
-    requestId: "REQ-1769532033417-k92pavr8k",
-    serviceId: "service-a",
-    serviceName: "خدمة التراخيص الإلكترونية",
-    companyName: "تراخيص",
+    requestId: "REQ-1770118051426-pizr4asbb",
+    serviceId: "service-b",
+    serviceName:
+      "خدمة التصديق على محاضر الجمعيات العامة ومجالس الإدارة والمجمعات العمرانية",
+    companyName: "تجاري",
     status: "",
-    creationTimeStamp: 1769532033423,
-    creationDate: "٢٧‏/١‏/٢٠٢٦",
-    currentStep: "awaitingReview",
-    completedSteps: [],
-    formData: {
-      formEntry: {
-        companyName: "sss",
-        companyType: "limited_partnership",
-        activityType: "manufacturing",
-        commercialRegister: "234",
-        capital: "443",
-      },
+    creationTimeStamp: 1770118051437,
+    creationDate: "٣‏/٢‏/٢٠٢٦",
+    currentStep: {
+      applying: "confirmInformation",
     },
+    completedSteps: [],
+    formData: {},
     machineSnapshot: {
       status: "active",
       context: {
-        isFormValid: true,
-        isReviewed: false,
-        isPaymentCompleted: false,
-        isShippingValid: false,
-        isRequestComplete: false,
+        formData: {
+          formEntry: {
+            companyName: "sss",
+            companyType: "partnership",
+            activityType: "real_estate",
+            commercialRegister: "2222",
+            capital: "33333",
+          },
+        },
+        paymentInfo: {},
+        shippingInfo: {},
+        Progress: {
+          lastUpdated: 1770118052743,
+          completion: [],
+          applying: [],
+          reviewing: [],
+          shipping: [],
+        },
+        InfoConfirmed: false,
+        paymentCompleted: false,
+        reviewApproved: false,
+        deliveryConfirmed: false,
+        requestRejected: false,
       },
-      value: "awaitingReview",
+      value: {
+        applying: "confirmInformation",
+      },
       children: {},
       historyValue: {},
       tags: [],
     },
   },
   {
-    requestId: "REQ-1769532050293-1jtfmcuob",
-    serviceId: "service-a",
-    serviceName: "خدمة التراخيص الإلكترونية",
-    companyName: "تراخيص",
+    requestId: "REQ-1770118051426-pizr4asbc",
+    serviceId: "service-b",
+    serviceName:
+      "خدمة التصديق على محاضر الجمعيات العامة ومجالس الإدارة والمجمعات العمرانية",
+    companyName: "تجاري",
     status: "",
-    creationTimeStamp: 1769532050293,
-    creationDate: "٢٧‏/١‏/٢٠٢٦",
-    currentStep: "paymentRequired",
-    completedSteps: [],
-    formData: {
-      formEntry: {
-        companyName: "sssss",
-        companyType: "llc",
-        activityType: "manufacturing",
-        commercialRegister: "222",
-        capital: "22",
-      },
-      verificationStep: {
-        verified: true,
-      },
+    creationTimeStamp: 1770118051437,
+    creationDate: "٣‏/٢‏/٢٠٢٦",
+    currentStep: {
+      applying: "payment",
     },
+    completedSteps: [],
+    formData: {},
     machineSnapshot: {
       status: "active",
       context: {
-        isFormValid: true,
-        isReviewed: true,
-        isPaymentCompleted: false,
-        isShippingValid: false,
-        isRequestComplete: false,
+        formData: {
+          formEntry: {
+            companyName: "sss",
+            companyType: "partnership",
+            activityType: "real_estate",
+            commercialRegister: "2222",
+            capital: "33333",
+          },
+        },
+        paymentInfo: {},
+        shippingInfo: {},
+        Progress: {
+          lastUpdated: 1770118104178,
+          completion: [],
+          applying: [
+            {
+              eventName: "تم إدخال المعلومات",
+              extra: "",
+              timestamp: 1770118104178,
+            },
+          ],
+          reviewing: [],
+          shipping: [],
+        },
+        InfoConfirmed: true,
+        paymentCompleted: false,
+        reviewApproved: false,
+        deliveryConfirmed: false,
+        requestRejected: false,
       },
-      value: "paymentRequired",
+      value: {
+        applying: "payment",
+      },
       children: {},
       historyValue: {},
       tags: [],
     },
   },
   {
-    requestId: "REQ-1769532072352-8k070urr7",
-    serviceId: "service-a",
-    serviceName: "خدمة التراخيص الإلكترونية",
-    companyName: "تراخيص",
+    requestId: "REQ-1770118051426-pizr4asbd",
+    serviceId: "service-b",
+    serviceName:
+      "خدمة التصديق على محاضر الجمعيات العامة ومجالس الإدارة والمجمعات العمرانية",
+    companyName: "تجاري",
     status: "",
-    creationTimeStamp: 1769532072353,
-    creationDate: "٢٧‏/١‏/٢٠٢٦",
-    currentStep: "shippingRequired",
-    completedSteps: [],
-    formData: {
-      formEntry: {
-        companyName: "sss",
-        companyType: "joint_stock",
-        activityType: "manufacturing",
-        commercialRegister: "222",
-        capital: "222",
-      },
-      verificationStep: {
-        verified: true,
-      },
+    creationTimeStamp: 1770118051437,
+    creationDate: "٣‏/٢‏/٢٠٢٦",
+    currentStep: {
+      applying: "payment",
     },
+    completedSteps: [],
+    formData: {},
     machineSnapshot: {
       status: "active",
       context: {
-        isFormValid: true,
-        isReviewed: true,
-        isPaymentCompleted: true,
-        isShippingValid: false,
-        isRequestComplete: false,
+        formData: {
+          formEntry: {
+            companyName: "sss",
+            companyType: "partnership",
+            activityType: "real_estate",
+            commercialRegister: "2222",
+            capital: "33333",
+          },
+        },
+        paymentInfo: {
+          feeItems: [
+            {
+              label: "قيمة رسم السجل التجاري",
+              price: 200,
+            },
+            {
+              label: "رسوم نقابة التجاريين",
+              price: 200,
+            },
+            {
+              label: "رسوم الهيئة العامة للاستثمار والأسواق الحرة",
+              price: 300,
+            },
+            {
+              label: "قيمة رسم الاتحاد العام للغرف",
+              price: 250,
+            },
+            {
+              label: "قيمة رسم التوثيق",
+              price: 400,
+            },
+          ],
+        },
+        shippingInfo: {},
+        Progress: {
+          lastUpdated: 1770118104178,
+          completion: [],
+          applying: [
+            {
+              eventName: "تم إدخال المعلومات",
+              extra: "",
+              timestamp: 1770118104178,
+            },
+          ],
+          reviewing: [],
+          shipping: [],
+        },
+        InfoConfirmed: true,
+        paymentCompleted: false,
+        reviewApproved: false,
+        deliveryConfirmed: false,
+        requestRejected: false,
       },
-      value: "shippingRequired",
+      value: {
+        applying: "payment",
+      },
       children: {},
       historyValue: {},
       tags: [],
     },
   },
   {
-    requestId: "REQ-1769532093864-kdc1ujyg1",
-    serviceId: "service-a",
-    serviceName: "خدمة التراخيص الإلكترونية",
-    companyName: "تراخيص",
+    requestId: "REQ-1770118051426-pizr4asbe",
+    serviceId: "service-b",
+    serviceName:
+      "خدمة التصديق على محاضر الجمعيات العامة ومجالس الإدارة والمجمعات العمرانية",
+    companyName: "تجاري",
     status: "",
-    creationTimeStamp: 1769532093864,
-    creationDate: "٢٧‏/١‏/٢٠٢٦",
+    creationTimeStamp: 1770118051437,
+    creationDate: "٣‏/٢‏/٢٠٢٦",
+    currentStep: {
+      underReview: "waitingForReviewer",
+    },
+    completedSteps: [],
+    formData: {},
+    machineSnapshot: {
+      status: "active",
+      context: {
+        formData: {
+          formEntry: {
+            companyName: "sss",
+            companyType: "partnership",
+            activityType: "real_estate",
+            commercialRegister: "2222",
+            capital: "33333",
+          },
+        },
+        paymentInfo: {
+          feeItems: [
+            {
+              label: "قيمة رسم السجل التجاري",
+              price: 200,
+            },
+            {
+              label: "رسوم نقابة التجاريين",
+              price: 200,
+            },
+            {
+              label: "رسوم الهيئة العامة للاستثمار والأسواق الحرة",
+              price: 300,
+            },
+            {
+              label: "قيمة رسم الاتحاد العام للغرف",
+              price: 250,
+            },
+            {
+              label: "قيمة رسم التوثيق",
+              price: 400,
+            },
+          ],
+        },
+        shippingInfo: {},
+        Progress: {
+          lastUpdated: 1770118163361,
+          completion: [],
+          applying: [
+            {
+              eventName: "تم إدخال المعلومات",
+              extra: "",
+              timestamp: 1770118104178,
+            },
+          ],
+          reviewing: [
+            {
+              eventName: "تم الدفع",
+              extra: "",
+              timestamp: 1770118163361,
+            },
+          ],
+          shipping: [],
+        },
+        InfoConfirmed: true,
+        paymentCompleted: true,
+        reviewApproved: false,
+        deliveryConfirmed: false,
+        requestRejected: false,
+      },
+      value: {
+        underReview: "waitingForReviewer",
+      },
+      children: {},
+      historyValue: {},
+      tags: [],
+    },
+  },
+  {
+    requestId: "REQ-1770118051426-pizr4asbf",
+    serviceId: "service-b",
+    serviceName:
+      "خدمة التصديق على محاضر الجمعيات العامة ومجالس الإدارة والمجمعات العمرانية",
+    companyName: "تجاري",
+    status: "",
+    creationTimeStamp: 1770118051437,
+    creationDate: "٣‏/٢‏/٢٠٢٦",
+    currentStep: {
+      shipping: "enterShippingInfo",
+    },
+    completedSteps: [],
+    formData: {},
+    machineSnapshot: {
+      status: "active",
+      context: {
+        formData: {
+          formEntry: {
+            companyName: "sss",
+            companyType: "partnership",
+            activityType: "real_estate",
+            commercialRegister: "2222",
+            capital: "33333",
+          },
+        },
+        paymentInfo: {
+          feeItems: [
+            {
+              label: "قيمة رسم السجل التجاري",
+              price: 200,
+            },
+            {
+              label: "رسوم نقابة التجاريين",
+              price: 200,
+            },
+            {
+              label: "رسوم الهيئة العامة للاستثمار والأسواق الحرة",
+              price: 300,
+            },
+            {
+              label: "قيمة رسم الاتحاد العام للغرف",
+              price: 250,
+            },
+            {
+              label: "قيمة رسم التوثيق",
+              price: 400,
+            },
+          ],
+        },
+        shippingInfo: {},
+        Progress: {
+          lastUpdated: 1770118194705,
+          completion: [],
+          applying: [
+            {
+              eventName: "تم إدخال المعلومات",
+              extra: "",
+              timestamp: 1770118104178,
+            },
+          ],
+          reviewing: [
+            {
+              eventName: "تم الدفع",
+              extra: "",
+              timestamp: 1770118163361,
+            },
+            {
+              eventName: "قيد المراجعة",
+              extra: "",
+              timestamp: 1770118194705,
+            },
+            {
+              eventName: "تمت الموافقة من قبل المراجع",
+              extra: "",
+              timestamp: 1770118194705,
+            },
+          ],
+          shipping: [],
+        },
+        InfoConfirmed: true,
+        paymentCompleted: true,
+        reviewApproved: true,
+        deliveryConfirmed: false,
+        requestRejected: false,
+      },
+      value: {
+        shipping: "enterShippingInfo",
+      },
+      children: {},
+      historyValue: {},
+      tags: [],
+    },
+  },
+  {
+    requestId: "REQ-1770118051426-pizr4asbg",
+    serviceId: "service-b",
+    serviceName:
+      "خدمة التصديق على محاضر الجمعيات العامة ومجالس الإدارة والمجمعات العمرانية",
+    companyName: "تجاري",
+    status: "",
+    creationTimeStamp: 1770118051437,
+    creationDate: "٣‏/٢‏/٢٠٢٦",
+    currentStep: {
+      shipping: "inTransit",
+    },
+    completedSteps: [],
+    formData: {},
+    machineSnapshot: {
+      status: "active",
+      context: {
+        formData: {
+          formEntry: {
+            companyName: "sss",
+            companyType: "partnership",
+            activityType: "real_estate",
+            commercialRegister: "2222",
+            capital: "33333",
+          },
+        },
+        paymentInfo: {
+          feeItems: [
+            {
+              label: "قيمة رسم السجل التجاري",
+              price: 200,
+            },
+            {
+              label: "رسوم نقابة التجاريين",
+              price: 200,
+            },
+            {
+              label: "رسوم الهيئة العامة للاستثمار والأسواق الحرة",
+              price: 300,
+            },
+            {
+              label: "قيمة رسم الاتحاد العام للغرف",
+              price: 250,
+            },
+            {
+              label: "قيمة رسم التوثيق",
+              price: 400,
+            },
+          ],
+        },
+        shippingInfo: {
+          shipping: {
+            address: "this is cairo egypt",
+          },
+        },
+        Progress: {
+          lastUpdated: 1770118335825,
+          completion: [],
+          applying: [
+            {
+              eventName: "تم إدخال المعلومات",
+              extra: "",
+              timestamp: 1770118104178,
+            },
+          ],
+          reviewing: [
+            {
+              eventName: "تم الدفع",
+              extra: "",
+              timestamp: 1770118163361,
+            },
+            {
+              eventName: "قيد المراجعة",
+              extra: "",
+              timestamp: 1770118194705,
+            },
+            {
+              eventName: "تمت الموافقة من قبل المراجع",
+              extra: "",
+              timestamp: 1770118194705,
+            },
+          ],
+          shipping: [
+            {
+              eventName: "تم تقديم عنوان الشحن",
+              extra: "عنوان الشحن، القاهرة، مصر، الطابق الثالث",
+              timestamp: 1770118335825,
+            },
+          ],
+        },
+        InfoConfirmed: true,
+        paymentCompleted: true,
+        reviewApproved: true,
+        deliveryConfirmed: false,
+        requestRejected: false,
+      },
+      value: {
+        shipping: "inTransit",
+      },
+      children: {},
+      historyValue: {},
+      tags: [],
+    },
+  },
+  {
+    requestId: "REQ-1770118051426-pizr4asbh",
+    serviceId: "service-b",
+    serviceName:
+      "خدمة التصديق على محاضر الجمعيات العامة ومجالس الإدارة والمجمعات العمرانية",
+    companyName: "تجاري",
+    status: "",
+    creationTimeStamp: 1770118051437,
+    creationDate: "٣‏/٢‏/٢٠٢٦",
     currentStep: "completed",
     completedSteps: [],
-    formData: {
-      formEntry: {
-        companyName: "ssrtasrt",
-        companyType: "joint_stock",
-        activityType: "manufacturing",
-        commercialRegister: "1234",
-        capital: "234",
-      },
-      verificationStep: {
-        verified: true,
-      },
-      shipping: {
-        address: "asrtasrt arst asrt",
-      },
-    },
+    formData: {},
     machineSnapshot: {
-      status: "active",
+      status: "done",
       context: {
-        isFormValid: true,
-        isReviewed: true,
-        isPaymentCompleted: true,
-        isShippingValid: true,
-        isRequestComplete: true,
+        formData: {
+          formEntry: {
+            companyName: "sss",
+            companyType: "partnership",
+            activityType: "real_estate",
+            commercialRegister: "2222",
+            capital: "33333",
+          },
+        },
+        paymentInfo: {
+          feeItems: [
+            {
+              label: "قيمة رسم السجل التجاري",
+              price: 200,
+            },
+            {
+              label: "رسوم نقابة التجاريين",
+              price: 200,
+            },
+            {
+              label: "رسوم الهيئة العامة للاستثمار والأسواق الحرة",
+              price: 300,
+            },
+            {
+              label: "قيمة رسم الاتحاد العام للغرف",
+              price: 250,
+            },
+            {
+              label: "قيمة رسم التوثيق",
+              price: 400,
+            },
+          ],
+        },
+        shippingInfo: {
+          shipping: {
+            address: "this is cairo egypt",
+          },
+        },
+        Progress: {
+          lastUpdated: 1770118371576,
+          completion: [],
+          applying: [
+            {
+              eventName: "تم إدخال المعلومات",
+              extra: "",
+              timestamp: 1770118104178,
+            },
+          ],
+          reviewing: [
+            {
+              eventName: "تم الدفع",
+              extra: "",
+              timestamp: 1770118163361,
+            },
+            {
+              eventName: "قيد المراجعة",
+              extra: "",
+              timestamp: 1770118194705,
+            },
+            {
+              eventName: "تمت الموافقة من قبل المراجع",
+              extra: "",
+              timestamp: 1770118194705,
+            },
+          ],
+          shipping: [
+            {
+              eventName: "تم تقديم عنوان الشحن",
+              extra: "عنوان الشحن، القاهرة، مصر، الطابق الثالث",
+              timestamp: 1770118335825,
+            },
+            {
+              eventName: "تم تسليم الشحنة",
+              extra: "عنوان الشحن، القاهرة، مصر، الطابق الثالث",
+              timestamp: 1770118371576,
+            },
+          ],
+        },
+        InfoConfirmed: true,
+        paymentCompleted: true,
+        reviewApproved: true,
+        deliveryConfirmed: true,
+        requestRejected: false,
       },
       value: "completed",
+      children: {},
+      historyValue: {},
+      tags: [],
+    },
+  },
+  {
+    requestId: "REQ-1770152357525-c6me8gb9n",
+    serviceId: "service-b",
+    serviceName:
+      "خدمة التصديق على محاضر الجمعيات العامة ومجالس الإدارة والمجمعات العمرانية",
+    companyName: "تجاري",
+    status: "",
+    creationTimeStamp: 1770152357526,
+    creationDate: "٣‏/٢‏/٢٠٢٦",
+    currentStep: "rejected",
+    completedSteps: [],
+    formData: {},
+    machineSnapshot: {
+      status: "done",
+      context: {
+        formData: {
+          formEntry: {
+            companyName: "ssrts",
+            companyType: "joint_stock",
+            activityType: "services",
+            commercialRegister: "234",
+            capital: "432",
+          },
+        },
+        paymentInfo: {
+          feeItems: [
+            {
+              label: "قيمة رسم السجل التجاري",
+              price: 200,
+            },
+            {
+              label: "رسوم نقابة التجاريين",
+              price: 200,
+            },
+            {
+              label: "رسوم الهيئة العامة للاستثمار والأسواق الحرة",
+              price: 300,
+            },
+            {
+              label: "قيمة رسم الاتحاد العام للغرف",
+              price: 250,
+            },
+            {
+              label: "قيمة رسم التوثيق",
+              price: 400,
+            },
+          ],
+        },
+        shippingInfo: {},
+        Progress: {
+          lastUpdated: 1770152607245,
+          completion: [
+            {
+              eventName: "تم رفضه من قبل المراجع تلقائياً",
+              extra: "تم تجاوز موعد استحقاق الدفع",
+              timestamp: 1770152607245,
+            },
+          ],
+          applying: [
+            {
+              eventName: "تم إدخال المعلومات",
+              extra: "",
+              timestamp: 1770152371722,
+            },
+          ],
+          reviewing: [
+            {
+              eventName: "تم الدفع",
+              extra: "",
+              timestamp: 1770152379788,
+            },
+            {
+              eventName: "قيد المراجعة",
+              extra: "",
+              timestamp: 1770152607245,
+            },
+          ],
+          shipping: [],
+        },
+        InfoConfirmed: true,
+        paymentCompleted: true,
+        reviewApproved: false,
+        deliveryConfirmed: false,
+        requestRejected: true,
+      },
+      value: "rejected",
       children: {},
       historyValue: {},
       tags: [],
