@@ -21,55 +21,66 @@ How a Service loads:
 	from the Common Components Parcels
 5. Finally the service will render
 
+
+## Quick start
+
+### How to run
+
+1. `npm i`
+2. `npm run install-all`
+3. copy `shell/.example.env` to `shell/.env.local`
+4. `npm run start-all`
+
+
 ## Development Setup
 
 ### Scripts Available
 
 - `npm run install-all` - Install dependencies for all packages
-- `npm run start-all` - Start all services (shell, common-components, mfe-service-a, shared-ui)
-- `npm run serve-config` - Start static server for services.json on port 3001
-- `npm run start-with-config` - Start all services + config server
+- `npm run start-all` - Start all services (shell, common-components, shared-ui)
+- `npm run dev-all` - Start all services (shell in dev mode, common-components, shared-ui)
 
 ### Dynamic Services Configuration
 
-The services configuration is externalized to `shell/public/services.json` and served via a static server on port 3001. This allows updating service configurations without rebuilding the shell.
+The services configuration is externalized to `services.json` and served via a static server on port 3001. This allows updating service configurations without rebuilding the shell.
 
 **To update services:**
-1. Edit `shell/public/services.json`
+1. Edit `services.json`
 2. The changes will be reflected immediately without rebuilding
-
-**Fallback behavior:**
-- If the config server (port 3001) is not available, the system falls back to the local `/services.json` from Next.js public folder
-- This ensures the system works in both development and production environments
-
-
-
-# How to run
-
-`npm i`
-`npm run install-all`
-`npm run start-all`
-
+3. Depending on the .env if its pointing to the CDN then a push is required to the main branch
+4. You can change the services.json to be `NEXT_PUBLIC_SERVICE_JSON=http://localhost:3001/services.json` in the `.env.local` for development purposes
 
 
 # Register a service
 
-Clone this [service](https://github.com/MagedWilliamdevlink/Companies-MFE-POC-Service-A) and change it, when its ready edit the serivces.json file and update the urls,
-you can use jsdeliver to make the dist available via cdn
+Clone this [service](https://github.com/MagedWilliamdevlink/Companies-MFE-POC-Service-B) and change it, 
+you then have to run:
+- `npm i`
+- update the port in `Companies-MFE-POC-Service-c/package.json` to be `"start": "webpack serve --port 8084"`,
+- `npm start`
+
+when its ready edit the serivces.json file and update the urls like the example below:
 
 ex: 
 ```json
 {
-    "id": "service-a",
-    "title": "خدمة التراخيص الإلكترونية",
-    "description": "إصدار وتجديد التراخيص الإلكترونية للمنشآت والشركات بسهولة",
-    "category": "تراخيص",
-    "status": "active",
-    "ctaLink": "/service-a",
-    "hostType": "microApp",
-    "hostInfo": {
-      "org": "@service-a/service-a",
-      "url": "https://cdn.jsdelivr.net/gh/MagedWilliamdevlink/Companies-MFE-POC-Service-A@main/dist/service-a-service-a.js"
-    }
-}
+  "id": "service-c",
+  "title": "خدمة التصديق على محاضر الجمعيات العامة ومجالس الإدارة والمجمعات العمرانية",
+  "description": "تهدف خدمة التصديق على القرارات والمحاضر",
+  "meta": {
+    "requiredDocs": [
+      "- صورة بطاقة الرقم القومي سارية والاطلاع على الأصل",
+    ],
+    "TOC": ["- أن تكون حالة الرخصة سارية وأن تكون رخصة وليست تصريح"]
+  },
+  "category": "تجاري",
+  "companyName": "الهلال للأستثمار والتنمية العمرانية",
+  "status": "active",
+  "ctaLink": "/new/service-c",
+  "hostType": "microApp",
+  "hostInfo": {
+    "org": "@service-c/service-c",
+    "url": "https://cdn.jsdelivr.net/gh/MagedWilliamdevlink/Companies-MFE-POC-Service-C@main/dist/service-c-service-c.js"
+  }
+},
 ```

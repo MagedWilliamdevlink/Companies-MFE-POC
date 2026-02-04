@@ -18,7 +18,7 @@
     "hostType": "microApp",
     "hostInfo": {
       "org": "@service-b/service-b",
-      "url": "http://localhost:8083/service-b-service-b.js"
+      "url": "https://cdn.jsdelivr.net/gh/MagedWilliamdevlink/Companies-MFE-POC-Service-B@main/dist/service-b-service-b.js"
     }
   },
   {
