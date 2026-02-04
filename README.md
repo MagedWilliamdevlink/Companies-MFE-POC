@@ -51,7 +51,7 @@ The services configuration is externalized to `services.json` and served via a s
 4. You can change the services.json to be `NEXT_PUBLIC_SERVICE_JSON=http://localhost:3001/services.json` in the `.env.local` for development purposes
 
 
-# Register a service
+# Register a new service
 
 Clone this [service](https://github.com/MagedWilliamdevlink/Companies-MFE-POC-Service-B) and change it, 
 you then have to run:
@@ -83,4 +83,22 @@ ex:
     "url": "https://cdn.jsdelivr.net/gh/MagedWilliamdevlink/Companies-MFE-POC-Service-C@main/dist/service-c-service-c.js"
   }
 },
+```
+
+
+## For local development (Do not actually run this, unless you are me)
+
+Edit `shell/.env.local` to have:
+```
+NEXT_PUBLIC_SERVICE_JSON=http://localhost:3001/services.json
+NEXT_PUBLIC_SHARED_UITOOLKIT=http://localhost:8081/shared-ui-shared-ui.js
+NEXT_PUBLIC_COMMON_COMPONENT=http://localhost:8082/common-common-components.js
+```
+
+in `services.json` edit the service you want to develop to the localhost url:
+```json
+"hostInfo": {
+  ...
+  "url": "http://localhost:8084/service-c-service-c.js"
+}
 ```
