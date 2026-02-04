@@ -150,6 +150,7 @@ function ThePage({ updater }) {
         <div className="main-column">
           <header className="card detail-card">
             <div className="header-text">
+              حالة الطلب
               <h2
                 className="text-2xl font-black"
                 style={{
@@ -158,7 +159,7 @@ function ThePage({ updater }) {
               >
                 {getCurrentStateScope().text}{" "}
               </h2>
-
+              اخر تحديث
               <p>
                 {lastUpdated !== 0 && new Date(lastUpdated).toDateString()}
                 {lastUpdated == 0 &&
