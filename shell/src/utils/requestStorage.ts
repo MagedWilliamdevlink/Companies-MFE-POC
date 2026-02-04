@@ -32,7 +32,7 @@ const mockRequests = [
     serviceId: "service-b",
     serviceName:
       "خدمة التصديق على محاضر الجمعيات العامة ومجالس الإدارة والمجمعات العمرانية",
-    companyName: "تجاري",
+    companyName: "الهلال للأستثمار والتنمية العمرانية",
     status: "",
     creationTimeStamp: 1770197874310,
     creationDate: "٤‏/٢‏/٢٠٢٦",
@@ -45,7 +45,7 @@ const mockRequests = [
     serviceId: "service-b",
     serviceName:
       "خدمة التصديق على محاضر الجمعيات العامة ومجالس الإدارة والمجمعات العمرانية",
-    companyName: "تجاري",
+    companyName: "الهلال للأستثمار والتنمية العمرانية",
     status: "",
     creationTimeStamp: 1770197874310,
     creationDate: "٤‏/٢‏/٢٠٢٦",
@@ -100,7 +100,7 @@ const mockRequests = [
     serviceId: "service-b",
     serviceName:
       "خدمة التصديق على محاضر الجمعيات العامة ومجالس الإدارة والمجمعات العمرانية",
-    companyName: "تجاري",
+    companyName: "الهلال للأستثمار والتنمية العمرانية",
     status: "",
     creationTimeStamp: 1770197874310,
     creationDate: "٤‏/٢‏/٢٠٢٦",
@@ -184,7 +184,7 @@ const mockRequests = [
     serviceId: "service-b",
     serviceName:
       "خدمة التصديق على محاضر الجمعيات العامة ومجالس الإدارة والمجمعات العمرانية",
-    companyName: "تجاري",
+    companyName: "الهلال للأستثمار والتنمية العمرانية",
     status: "",
     creationTimeStamp: 1770197874310,
     creationDate: "٤‏/٢‏/٢٠٢٦",
@@ -278,7 +278,7 @@ const mockRequests = [
     serviceId: "service-b",
     serviceName:
       "خدمة التصديق على محاضر الجمعيات العامة ومجالس الإدارة والمجمعات العمرانية",
-    companyName: "تجاري",
+    companyName: "الهلال للأستثمار والتنمية العمرانية",
     status: "",
     creationTimeStamp: 1770197874310,
     creationDate: "٤‏/٢‏/٢٠٢٦",
@@ -382,7 +382,7 @@ const mockRequests = [
     serviceId: "service-b",
     serviceName:
       "خدمة التصديق على محاضر الجمعيات العامة ومجالس الإدارة والمجمعات العمرانية",
-    companyName: "تجاري",
+    companyName: "الهلال للأستثمار والتنمية العمرانية",
     status: "",
     creationTimeStamp: 1770197874310,
     creationDate: "٤‏/٢‏/٢٠٢٦",
@@ -493,7 +493,7 @@ const mockRequests = [
     serviceId: "service-b",
     serviceName:
       "خدمة التصديق على محاضر الجمعيات العامة ومجالس الإدارة والمجمعات العمرانية",
-    companyName: "تجاري",
+    companyName: "الهلال للأستثمار والتنمية العمرانية",
     status: "",
     creationTimeStamp: 1770198063638,
     creationDate: "٤‏/٢‏/٢٠٢٦",
