@@ -7,6 +7,7 @@ export interface Service {
     TOC: [] | string;
   };
   category: string;
+  companyName: string;
   status: "active" | "inactive" | "pending" | "completed" | "cancelled";
   ctaLink: string;
   hostType: "microApp" | "external";

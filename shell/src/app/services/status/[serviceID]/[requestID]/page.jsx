@@ -81,7 +81,7 @@ function ThePage({ updater }) {
       bg: "#ffb300",
     },
     shipping: {
-      text: "الشحن",
+      text: "معلومات الشحن",
       bg: "#ffb300",
     },
     completed: {

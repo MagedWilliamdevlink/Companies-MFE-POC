@@ -13,7 +13,7 @@ const createNewService = (serviceID, router) => {
     const generatedRequest = createRequest(
       getSevice?.id,
       getSevice?.title,
-      getSevice?.category,
+      getSevice?.companyName,
     );
     router.push(
       `/services/${generatedRequest.serviceId}/${generatedRequest.requestId}`,

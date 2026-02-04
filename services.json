@@ -12,6 +12,7 @@
       "TOC": ["- أن تكون حالة الرخصة سارية وأن تكون رخصة وليست تصريح"]
     },
     "category": "تجاري",
+    "companyName": "الهلال للأستثمار والتنمية العمرانية",
     "status": "active",
     "ctaLink": "/new/service-b",
     "hostType": "microApp",
@@ -33,6 +34,7 @@
       "TOC": ["- أن تكون حالة الرخصة سارية وأن تكون رخصة وليست تصريح"]
     },
     "category": "استعلامات",
+    "companyName": "الهلال للأستثمار والتنمية العمرانية",
     "status": "active",
     "ctaLink": "/new/service-c",
     "hostType": "microApp",
@@ -54,6 +56,7 @@
       "TOC": ["- أن تكون حالة الرخصة سارية وأن تكون رخصة وليست تصريح"]
     },
     "category": "تراخيص",
+    "companyName": "الهلال للأستثمار والتنمية العمرانية",
     "status": "active",
     "ctaLink": "/new/service-a",
     "hostType": "microApp",
@@ -75,6 +78,7 @@
       "TOC": ["- أن تكون حالة الرخصة سارية وأن تكون رخصة وليست تصريح"]
     },
     "category": "دعم",
+    "companyName": "الهلال للأستثمار والتنمية العمرانية",
     "status": "pending",
     "ctaLink": "/new/service-d",
     "hostType": "microApp",
@@ -96,6 +100,7 @@
       "TOC": ["- أن تكون حالة الرخصة سارية وأن تكون رخصة وليست تصريح"]
     },
     "category": "تقارير",
+    "companyName": "الهلال للأستثمار والتنمية العمرانية",
     "status": "active",
     "ctaLink": "/new/service-e",
     "hostType": "microApp",
@@ -117,6 +122,7 @@
       "TOC": ["- أن تكون حالة الرخصة سارية وأن تكون رخصة وليست تصريح"]
     },
     "category": "إدارة",
+    "companyName": "الهلال للأستثمار والتنمية العمرانية",
     "status": "completed",
     "ctaLink": "/new/service-f",
     "hostType": "microApp",
@@ -138,6 +144,7 @@
       "TOC": ["- أن تكون حالة الرخصة سارية وأن تكون رخصة وليست تصريح"]
     },
     "category": "إشعارات",
+    "companyName": "الهلال للأستثمار والتنمية العمرانية",
     "status": "active",
     "ctaLink": "/new/service-g",
     "hostType": "microApp",
@@ -159,6 +166,7 @@
       "TOC": ["- أن تكون حالة الرخصة سارية وأن تكون رخصة وليست تصريح"]
     },
     "category": "مالية",
+    "companyName": "الهلال للأستثمار والتنمية العمرانية",
     "status": "inactive",
     "ctaLink": "/new/service-h",
     "hostType": "microApp",
