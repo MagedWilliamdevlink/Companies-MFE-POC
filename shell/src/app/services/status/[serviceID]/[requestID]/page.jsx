@@ -122,19 +122,28 @@ function ThePage({ updater }) {
     } else if (getState === null) {
       if (hasCompleted) {
         return stateLookup.NEW;
-      } else if (request.currentStep === "NEW") {
+      } else if (request?.currentStep === "NEW") {
         return stateLookup.NEW;
       } else if (requestRejected) {
         return stateLookup.rejected;
       }
     }
 
-    return null;
+    return {
+      text: "",
+      bg: "",
+    };
   };
 
   return (
     <>
-      {updater}
+      <div
+        style={{
+          display: "none",
+        }}
+      >
+        {updater}
+      </div>
       <br />
       <div className="container">
         {/* Left Column: Tracking & Main Status */}
@@ -164,7 +173,7 @@ function ThePage({ updater }) {
               }}
             >
               <Link
-                href={`/services/${request.serviceId}/${request.requestId}`}
+                href={`/services/${request?.serviceId}/${request?.requestId}`}
               >
                 <Button type="primary">تابع الطلب</Button>
               </Link>
@@ -184,11 +193,11 @@ function ThePage({ updater }) {
             >
               {hasApplied && (
                 <div className="flex gap-2 mb-6">
-                  {hasReviewed ? <Done /> : <InProg />}
+                  {hasReviewed || requestRejected ? <Done /> : <InProg />}
                   <Collapse
                     expandIconPlacement="end"
                     defaultActiveKey={
-                      hasReviewed ? null : !requestRejected && ["applying"]
+                      hasReviewed || requestRejected ? null : ["applying"]
                     }
                     items={[
                       {
@@ -200,7 +209,7 @@ function ThePage({ updater }) {
                               <li key={index}>
                                 {log.eventName}, {log.extra}{" "}
                                 <span>
-                                  {new Date(log.timestamp).toISOString()}
+                                  {new Date(log.timestamp).toDateString()}
                                 </span>
                               </li>
                             ))}
@@ -208,19 +217,19 @@ function ThePage({ updater }) {
                         ),
                       },
                     ]}
-                    className={`timeline-card ${hasReviewed ? "green-border" : "yellow-border"} flex-1`}
+                    className={`timeline-card ${hasReviewed || requestRejected ? "green-border" : "yellow-border"} flex-1`}
                   />
                 </div>
               )}
 
               {hasReviewed && (
                 <div className="flex gap-2 mb-6">
-                  {hasShipping ? <Done /> : <InProg />}
+                  {hasShipping || requestRejected ? <Done /> : <InProg />}
 
                   <Collapse
                     expandIconPlacement="end"
                     defaultActiveKey={
-                      hasShipping ? null : !requestRejected && ["reviewing"]
+                      hasShipping || requestRejected ? null : ["reviewing"]
                     }
                     items={[
                       {
@@ -234,7 +243,7 @@ function ThePage({ updater }) {
                               <li key={index}>
                                 {log.eventName}, {log.extra}{" "}
                                 <span>
-                                  {new Date(log.timestamp).toISOString()}
+                                  {new Date(log.timestamp).toDateString()}
                                 </span>
                               </li>
                             ))}
@@ -242,31 +251,31 @@ function ThePage({ updater }) {
                         ),
                       },
                     ]}
-                    className={`timeline-card ${hasShipping ? "green-border" : "yellow-border"} flex-1`}
+                    className={`timeline-card ${hasShipping || requestRejected ? "green-border" : "yellow-border"} flex-1`}
                   />
                 </div>
               )}
 
               {hasShipping && (
                 <div className="flex gap-2 mb-6">
-                  {hasCompleted ? <Done /> : <InProg />}
+                  {hasCompleted || requestRejected ? <Done /> : <InProg />}
 
                   <Collapse
                     expandIconPlacement="end"
                     defaultActiveKey={
-                      hasCompleted ? null : !requestRejected && ["shipping"]
+                      hasCompleted || requestRejected ? null : ["shipping"]
                     }
                     items={[
                       {
                         key: "shipping",
-                        label: <span className="label">الشحنة في الطريق</span>,
+                        label: <span className="label">الطلب تحت التسليم</span>,
                         children: (
                           <ul className="sub-steps">
                             {shippingLogs.map((log, index) => (
                               <li key={index}>
                                 {log.eventName}, {log.extra}{" "}
                                 <span>
-                                  {new Date(log.timestamp).toISOString()}
+                                  {new Date(log.timestamp).toDateString()}
                                 </span>
                               </li>
                             ))}
@@ -274,7 +283,7 @@ function ThePage({ updater }) {
                         ),
                       },
                     ]}
-                    className={`timeline-card ${hasCompleted ? "green-border" : "yellow-border"} flex-1`}
+                    className={`timeline-card ${hasCompleted || requestRejected ? "green-border" : "yellow-border"} flex-1`}
                   />
                 </div>
               )}
@@ -301,7 +310,7 @@ function ThePage({ updater }) {
                               <li key={index}>
                                 {log.eventName}, {log.extra}{" "}
                                 <span>
-                                  {new Date(log.timestamp).toISOString()}
+                                  {new Date(log.timestamp).toDateString()}
                                 </span>
                               </li>
                             ))}
@@ -333,7 +342,7 @@ function ThePage({ updater }) {
               items={[
                 {
                   key: "request-details",
-                  label: <h4 className="font-black">{request.serviceName}</h4>,
+                  label: <h4 className="font-black">{request?.serviceName}</h4>,
                   children: (
                     <>
                       {request?.creationTimeStamp && (

@@ -52,7 +52,7 @@ const stateLookup = {
     bg: "#ffb300",
   },
   shipping: {
-    text: "الشحن",
+    text: "قيد الشحن",
     bg: "#ffb300",
   },
   completed: {

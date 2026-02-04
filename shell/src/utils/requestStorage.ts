@@ -28,76 +28,27 @@ export function generateRequestId(): string {
 // Mock Data - Keep for fallback
 const mockRequests = [
   {
-    requestId: "REQ-1770118051426-pizr4asba",
+    requestId: "REQ-1770197874290-p14zhwnka",
     serviceId: "service-b",
     serviceName:
       "خدمة التصديق على محاضر الجمعيات العامة ومجالس الإدارة والمجمعات العمرانية",
     companyName: "تجاري",
     status: "",
-    creationTimeStamp: 1770118051437,
-    creationDate: "٣‏/٢‏/٢٠٢٦",
+    creationTimeStamp: 1770197874310,
+    creationDate: "٤‏/٢‏/٢٠٢٦",
     currentStep: "NEW",
     completedSteps: [],
     formData: {},
   },
   {
-    requestId: "REQ-1770118051426-pizr4asbb",
+    requestId: "REQ-1770197874290-p14zhwnkb",
     serviceId: "service-b",
     serviceName:
       "خدمة التصديق على محاضر الجمعيات العامة ومجالس الإدارة والمجمعات العمرانية",
     companyName: "تجاري",
     status: "",
-    creationTimeStamp: 1770118051437,
-    creationDate: "٣‏/٢‏/٢٠٢٦",
-    currentStep: {
-      applying: "confirmInformation",
-    },
-    completedSteps: [],
-    formData: {},
-    machineSnapshot: {
-      status: "active",
-      context: {
-        formData: {
-          formEntry: {
-            companyName: "sss",
-            companyType: "partnership",
-            activityType: "real_estate",
-            commercialRegister: "2222",
-            capital: "33333",
-          },
-        },
-        paymentInfo: {},
-        shippingInfo: {},
-        Progress: {
-          lastUpdated: 1770118052743,
-          completion: [],
-          applying: [],
-          reviewing: [],
-          shipping: [],
-        },
-        InfoConfirmed: false,
-        paymentCompleted: false,
-        reviewApproved: false,
-        deliveryConfirmed: false,
-        requestRejected: false,
-      },
-      value: {
-        applying: "confirmInformation",
-      },
-      children: {},
-      historyValue: {},
-      tags: [],
-    },
-  },
-  {
-    requestId: "REQ-1770118051426-pizr4asbc",
-    serviceId: "service-b",
-    serviceName:
-      "خدمة التصديق على محاضر الجمعيات العامة ومجالس الإدارة والمجمعات العمرانية",
-    companyName: "تجاري",
-    status: "",
-    creationTimeStamp: 1770118051437,
-    creationDate: "٣‏/٢‏/٢٠٢٦",
+    creationTimeStamp: 1770197874310,
+    creationDate: "٤‏/٢‏/٢٠٢٦",
     currentStep: {
       applying: "payment",
     },
@@ -108,9 +59,9 @@ const mockRequests = [
       context: {
         formData: {
           formEntry: {
-            companyName: "sss",
-            companyType: "partnership",
-            activityType: "real_estate",
+            companyName: "srtasrt",
+            companyType: "llc",
+            activityType: "it",
             commercialRegister: "2222",
             capital: "33333",
           },
@@ -118,13 +69,13 @@ const mockRequests = [
         paymentInfo: {},
         shippingInfo: {},
         Progress: {
-          lastUpdated: 1770118104178,
+          lastUpdated: 1770197918855,
           completion: [],
           applying: [
             {
               eventName: "تم إدخال المعلومات",
               extra: "",
-              timestamp: 1770118104178,
+              timestamp: 1770197918855,
             },
           ],
           reviewing: [],
@@ -145,92 +96,14 @@ const mockRequests = [
     },
   },
   {
-    requestId: "REQ-1770118051426-pizr4asbd",
+    requestId: "REQ-1770197874290-p14zhwnkc",
     serviceId: "service-b",
     serviceName:
       "خدمة التصديق على محاضر الجمعيات العامة ومجالس الإدارة والمجمعات العمرانية",
     companyName: "تجاري",
     status: "",
-    creationTimeStamp: 1770118051437,
-    creationDate: "٣‏/٢‏/٢٠٢٦",
-    currentStep: {
-      applying: "payment",
-    },
-    completedSteps: [],
-    formData: {},
-    machineSnapshot: {
-      status: "active",
-      context: {
-        formData: {
-          formEntry: {
-            companyName: "sss",
-            companyType: "partnership",
-            activityType: "real_estate",
-            commercialRegister: "2222",
-            capital: "33333",
-          },
-        },
-        paymentInfo: {
-          feeItems: [
-            {
-              label: "قيمة رسم السجل التجاري",
-              price: 200,
-            },
-            {
-              label: "رسوم نقابة التجاريين",
-              price: 200,
-            },
-            {
-              label: "رسوم الهيئة العامة للاستثمار والأسواق الحرة",
-              price: 300,
-            },
-            {
-              label: "قيمة رسم الاتحاد العام للغرف",
-              price: 250,
-            },
-            {
-              label: "قيمة رسم التوثيق",
-              price: 400,
-            },
-          ],
-        },
-        shippingInfo: {},
-        Progress: {
-          lastUpdated: 1770118104178,
-          completion: [],
-          applying: [
-            {
-              eventName: "تم إدخال المعلومات",
-              extra: "",
-              timestamp: 1770118104178,
-            },
-          ],
-          reviewing: [],
-          shipping: [],
-        },
-        InfoConfirmed: true,
-        paymentCompleted: false,
-        reviewApproved: false,
-        deliveryConfirmed: false,
-        requestRejected: false,
-      },
-      value: {
-        applying: "payment",
-      },
-      children: {},
-      historyValue: {},
-      tags: [],
-    },
-  },
-  {
-    requestId: "REQ-1770118051426-pizr4asbe",
-    serviceId: "service-b",
-    serviceName:
-      "خدمة التصديق على محاضر الجمعيات العامة ومجالس الإدارة والمجمعات العمرانية",
-    companyName: "تجاري",
-    status: "",
-    creationTimeStamp: 1770118051437,
-    creationDate: "٣‏/٢‏/٢٠٢٦",
+    creationTimeStamp: 1770197874310,
+    creationDate: "٤‏/٢‏/٢٠٢٦",
     currentStep: {
       underReview: "waitingForReviewer",
     },
@@ -241,9 +114,9 @@ const mockRequests = [
       context: {
         formData: {
           formEntry: {
-            companyName: "sss",
-            companyType: "partnership",
-            activityType: "real_estate",
+            companyName: "srtasrt",
+            companyType: "llc",
+            activityType: "it",
             commercialRegister: "2222",
             capital: "33333",
           },
@@ -274,20 +147,20 @@ const mockRequests = [
         },
         shippingInfo: {},
         Progress: {
-          lastUpdated: 1770118163361,
+          lastUpdated: 1770197968072,
           completion: [],
           applying: [
             {
               eventName: "تم إدخال المعلومات",
               extra: "",
-              timestamp: 1770118104178,
+              timestamp: 1770197918855,
             },
           ],
           reviewing: [
             {
               eventName: "تم الدفع",
               extra: "",
-              timestamp: 1770118163361,
+              timestamp: 1770197968072,
             },
           ],
           shipping: [],
@@ -307,14 +180,14 @@ const mockRequests = [
     },
   },
   {
-    requestId: "REQ-1770118051426-pizr4asbf",
+    requestId: "REQ-1770197874290-p14zhwnkd",
     serviceId: "service-b",
     serviceName:
       "خدمة التصديق على محاضر الجمعيات العامة ومجالس الإدارة والمجمعات العمرانية",
     companyName: "تجاري",
     status: "",
-    creationTimeStamp: 1770118051437,
-    creationDate: "٣‏/٢‏/٢٠٢٦",
+    creationTimeStamp: 1770197874310,
+    creationDate: "٤‏/٢‏/٢٠٢٦",
     currentStep: {
       shipping: "enterShippingInfo",
     },
@@ -325,9 +198,9 @@ const mockRequests = [
       context: {
         formData: {
           formEntry: {
-            companyName: "sss",
-            companyType: "partnership",
-            activityType: "real_estate",
+            companyName: "srtasrt",
+            companyType: "llc",
+            activityType: "it",
             commercialRegister: "2222",
             capital: "33333",
           },
@@ -358,30 +231,30 @@ const mockRequests = [
         },
         shippingInfo: {},
         Progress: {
-          lastUpdated: 1770118194705,
+          lastUpdated: 1770197999523,
           completion: [],
           applying: [
             {
               eventName: "تم إدخال المعلومات",
               extra: "",
-              timestamp: 1770118104178,
+              timestamp: 1770197918855,
             },
           ],
           reviewing: [
             {
               eventName: "تم الدفع",
               extra: "",
-              timestamp: 1770118163361,
+              timestamp: 1770197968072,
             },
             {
               eventName: "قيد المراجعة",
               extra: "",
-              timestamp: 1770118194705,
+              timestamp: 1770197999523,
             },
             {
               eventName: "تمت الموافقة من قبل المراجع",
               extra: "",
-              timestamp: 1770118194705,
+              timestamp: 1770197999523,
             },
           ],
           shipping: [],
@@ -401,14 +274,14 @@ const mockRequests = [
     },
   },
   {
-    requestId: "REQ-1770118051426-pizr4asbg",
+    requestId: "REQ-1770197874290-p14zhwnke",
     serviceId: "service-b",
     serviceName:
       "خدمة التصديق على محاضر الجمعيات العامة ومجالس الإدارة والمجمعات العمرانية",
     companyName: "تجاري",
     status: "",
-    creationTimeStamp: 1770118051437,
-    creationDate: "٣‏/٢‏/٢٠٢٦",
+    creationTimeStamp: 1770197874310,
+    creationDate: "٤‏/٢‏/٢٠٢٦",
     currentStep: {
       shipping: "inTransit",
     },
@@ -419,9 +292,9 @@ const mockRequests = [
       context: {
         formData: {
           formEntry: {
-            companyName: "sss",
-            companyType: "partnership",
-            activityType: "real_estate",
+            companyName: "srtasrt",
+            companyType: "llc",
+            activityType: "it",
             commercialRegister: "2222",
             capital: "33333",
           },
@@ -452,41 +325,41 @@ const mockRequests = [
         },
         shippingInfo: {
           shipping: {
-            address: "this is cairo egypt",
+            address: "عنوان الشحن، القاهرة، مصر، الطابق الثالث",
           },
         },
         Progress: {
-          lastUpdated: 1770118335825,
+          lastUpdated: 1770198028198,
           completion: [],
           applying: [
             {
               eventName: "تم إدخال المعلومات",
               extra: "",
-              timestamp: 1770118104178,
+              timestamp: 1770197918855,
             },
           ],
           reviewing: [
             {
               eventName: "تم الدفع",
               extra: "",
-              timestamp: 1770118163361,
+              timestamp: 1770197968072,
             },
             {
               eventName: "قيد المراجعة",
               extra: "",
-              timestamp: 1770118194705,
+              timestamp: 1770197999523,
             },
             {
               eventName: "تمت الموافقة من قبل المراجع",
               extra: "",
-              timestamp: 1770118194705,
+              timestamp: 1770197999523,
             },
           ],
           shipping: [
             {
               eventName: "تم تقديم عنوان الشحن",
               extra: "عنوان الشحن، القاهرة، مصر، الطابق الثالث",
-              timestamp: 1770118335825,
+              timestamp: 1770198028198,
             },
           ],
         },
@@ -505,14 +378,14 @@ const mockRequests = [
     },
   },
   {
-    requestId: "REQ-1770118051426-pizr4asbh",
+    requestId: "REQ-1770197874290-p14zhwnkf",
     serviceId: "service-b",
     serviceName:
       "خدمة التصديق على محاضر الجمعيات العامة ومجالس الإدارة والمجمعات العمرانية",
     companyName: "تجاري",
     status: "",
-    creationTimeStamp: 1770118051437,
-    creationDate: "٣‏/٢‏/٢٠٢٦",
+    creationTimeStamp: 1770197874310,
+    creationDate: "٤‏/٢‏/٢٠٢٦",
     currentStep: "completed",
     completedSteps: [],
     formData: {},
@@ -521,9 +394,9 @@ const mockRequests = [
       context: {
         formData: {
           formEntry: {
-            companyName: "sss",
-            companyType: "partnership",
-            activityType: "real_estate",
+            companyName: "srtasrt",
+            companyType: "llc",
+            activityType: "it",
             commercialRegister: "2222",
             capital: "33333",
           },
@@ -554,46 +427,52 @@ const mockRequests = [
         },
         shippingInfo: {
           shipping: {
-            address: "this is cairo egypt",
+            address: "عنوان الشحن، القاهرة، مصر، الطابق الثالث",
           },
         },
         Progress: {
-          lastUpdated: 1770118371576,
-          completion: [],
+          lastUpdated: 1770198049155,
+          completion: [
+            {
+              eventName: "تم تسليم الشحنة",
+              extra: "",
+              timestamp: 1770198049155,
+            },
+          ],
           applying: [
             {
               eventName: "تم إدخال المعلومات",
               extra: "",
-              timestamp: 1770118104178,
+              timestamp: 1770197918855,
             },
           ],
           reviewing: [
             {
               eventName: "تم الدفع",
               extra: "",
-              timestamp: 1770118163361,
+              timestamp: 1770197968072,
             },
             {
               eventName: "قيد المراجعة",
               extra: "",
-              timestamp: 1770118194705,
+              timestamp: 1770197999523,
             },
             {
               eventName: "تمت الموافقة من قبل المراجع",
               extra: "",
-              timestamp: 1770118194705,
+              timestamp: 1770197999523,
             },
           ],
           shipping: [
             {
               eventName: "تم تقديم عنوان الشحن",
               extra: "عنوان الشحن، القاهرة، مصر، الطابق الثالث",
-              timestamp: 1770118335825,
+              timestamp: 1770198028198,
             },
             {
-              eventName: "تم تسليم الشحنة",
-              extra: "عنوان الشحن، القاهرة، مصر، الطابق الثالث",
-              timestamp: 1770118371576,
+              eventName: "تم تأكيد استلام الشحنة من قبل البريد",
+              extra: "",
+              timestamp: 1770198049155,
             },
           ],
         },
@@ -610,14 +489,14 @@ const mockRequests = [
     },
   },
   {
-    requestId: "REQ-1770152357525-c6me8gb9n",
+    requestId: "REQ-1770198063638-enjly9e5v",
     serviceId: "service-b",
     serviceName:
       "خدمة التصديق على محاضر الجمعيات العامة ومجالس الإدارة والمجمعات العمرانية",
     companyName: "تجاري",
     status: "",
-    creationTimeStamp: 1770152357526,
-    creationDate: "٣‏/٢‏/٢٠٢٦",
+    creationTimeStamp: 1770198063638,
+    creationDate: "٤‏/٢‏/٢٠٢٦",
     currentStep: "rejected",
     completedSteps: [],
     formData: {},
@@ -626,11 +505,11 @@ const mockRequests = [
       context: {
         formData: {
           formEntry: {
-            companyName: "ssrts",
-            companyType: "joint_stock",
-            activityType: "services",
-            commercialRegister: "234",
-            capital: "432",
+            companyName: "artsrat",
+            companyType: "llc",
+            activityType: "real_estate",
+            commercialRegister: "1324",
+            capital: "4312",
           },
         },
         paymentInfo: {
@@ -659,31 +538,31 @@ const mockRequests = [
         },
         shippingInfo: {},
         Progress: {
-          lastUpdated: 1770152607245,
+          lastUpdated: 1770198108785,
           completion: [
             {
               eventName: "تم رفضه من قبل المراجع تلقائياً",
               extra: "تم تجاوز موعد استحقاق الدفع",
-              timestamp: 1770152607245,
+              timestamp: 1770198108785,
             },
           ],
           applying: [
             {
               eventName: "تم إدخال المعلومات",
               extra: "",
-              timestamp: 1770152371722,
+              timestamp: 1770198080313,
             },
           ],
           reviewing: [
             {
               eventName: "تم الدفع",
               extra: "",
-              timestamp: 1770152379788,
+              timestamp: 1770198090263,
             },
             {
               eventName: "قيد المراجعة",
               extra: "",
-              timestamp: 1770152607245,
+              timestamp: 1770198108785,
             },
           ],
           shipping: [],
